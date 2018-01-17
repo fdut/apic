@@ -269,7 +269,7 @@ definitions:
       error_description:
         type: "string"
         description: "Full error description (including the origin, if any)"
-        example: "[Main courante] User was not authenticated"
+        example: "User was not authenticated"
       error_uri:
         type: "string"
         description: "Help link if relevant"

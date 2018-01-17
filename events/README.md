@@ -140,9 +140,9 @@ An example
 
 ```
   {
-      clientid: '2e5af234-f92d-4c25-b490-192449f06483',
-      clientsecret: 'U8jF8mBmmeX3eX6nV1pP45632K3cS6fM5jV2dB5lU6aE2cW3oD2hN1',
-      apicEndpoint: 'https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb'
+      clientid: '12345678-f92d-4c25-b490-192449f06483',
+      clientsecret: 'ABCDEFBmmeX3eX6nV1pP12345K3cS6fM5jV2dB5lU6aE2cW3oD2hN1',
+      apicEndpoint: 'https://api.eu-de.apiconnect.ibmcloud.com/org-dev/sb'
     };
 ```
 
