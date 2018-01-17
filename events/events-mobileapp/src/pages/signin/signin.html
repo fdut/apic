@@ -1,0 +1,48 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-buttons start>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Signin</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding no-bounce>
+    <form #f="ngForm" (ngSubmit)="onSignin(f)">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Mail</ion-label>
+          <ion-input
+            type="email"
+            ngModel
+            name="email"
+            required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Password</ion-label>
+          <ion-input
+            type="password"
+            ngModel
+            name="password"
+            required></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button 
+             ion-button 
+             block 
+             color="secondary"
+             type="submit"
+             [disabled]="!f.valid">Login</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>

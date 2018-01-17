@@ -1,0 +1,9 @@
+// Update value and rename as : apic.ts
+
+export default 
+    {
+      clientid: '000000-f92d-4c25-b490-192449f06483',
+      clientsecret: '000000eX3eX6nV1pP5mK3cS6fM5jV2dB5lU6aE2cW3oD2hN1',
+      apicEndpoint: 'https://api.eu-de.apiconnect.ibmcloud.com/org-dev/sb'
+    };
+  

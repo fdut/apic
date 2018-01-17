@@ -1,0 +1,37 @@
+<ion-header>
+      <ion-navbar>
+          <ion-buttons start>
+              <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+              </button>
+            </ion-buttons>
+        <ion-title>Events</ion-title>
+      </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <h3 text-center>List of events</h3>
+    <ion-list>
+      <ion-item-sliding *ngFor="let event of events">
+        <ion-item
+          (click)="onViewEvent()">
+          <ion-label>
+          <h2>{{ event.doc.title }}</h2>
+          <p>{{ event.doc.timestamp  | date: 'EEEE, MMMM d, y, HH:mm:ss' }}</p>
+          <h3>{{ event.doc.description }}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item-options>
+          <button 
+            ion-button
+            color="danger"
+            (click)="onDeleteEvent(event)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  
+  </ion-content>
