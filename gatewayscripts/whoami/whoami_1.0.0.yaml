@@ -1,0 +1,43 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "whoami"
+  title: "whoami"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/mockup"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - gatewayscript:
+        title: "whoami"
+        version: "1.0.0"
+        source: "var out = {\"message\":\"Greeting! Hello World\"};\nout.context=apim.getContext();\n\
+          session.output.write(JSON.stringify(out));\napim.output(\"application/json\"\
+          );\n"
+  phase: "realized"
+paths:
+  /whoami:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+definitions: {}
+tags: []
