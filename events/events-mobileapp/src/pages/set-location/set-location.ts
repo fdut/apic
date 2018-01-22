@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
-import { AgmCoreModule } from '@agm/core';
+import { IonicPage, NavParams,ViewController } from 'ionic-angular';
 import { Location } from '../../models/location';
-import { Loading } from 'ionic-angular/components/loading/loading';
 
 @IonicPage()
 @Component({
