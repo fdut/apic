@@ -98,6 +98,7 @@ export class AddEventPage {
         });
         alert.present();
         form.reset();
+        this.locationIsSet = false;
       }
       ,(err) => {this.error = 'Unable to connect.';
         const alert = this.alertCtrl.create({
