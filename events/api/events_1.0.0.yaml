@@ -21,7 +21,7 @@ securityDefinitions:
     scopes:
       openid: ""
       citizen: ""
-    tokenUrl: "$(api.endpoint.address)/oauth2/token"
+    tokenUrl: "https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb/oauth2/token"
   clientSecretHeader:
     type: "apiKey"
     description: ""
@@ -93,6 +93,22 @@ x-ibm-configuration:
               target-url: "https://$(db-url)/$(db-name)/$(request.parameters.id)?rev=$(request.parameters.rev)"
               username: "$(db-userid)"
               password: "$(db-pwd)"
+        - operations:
+          - verb: "put"
+            path: "/events"
+          execute:
+          - invoke:
+              title: "Update"
+              timeout: 60
+              verb: "PUT"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "https://$(db-url)/$(db-name)/$(request.parameters.id)?rev=$(request.parameters.rev)"
+              username: "$(db-userid)"
+              password: "$(db-pwd)"
         otherwise: []
         version: "1.0.0"
   phase: "realized"
@@ -102,15 +118,15 @@ x-ibm-configuration:
       description: ""
       encoded: false
     db-pwd:
-      value: "REPLACE_WITH_CLOUDANT_API_KEY_PASSWORD"
+      value: "93b335531db4ad484cfe2a109fb5c79cef1cd9f3"
       description: "password"
       encoded: false
     db-userid:
-      value: "REPLACE_WITH_CLOUDANT_API_KEY"
+      value: "aderendryingstivencestan"
       description: "username"
       encoded: false
     db-url:
-      value: "REPLACE_WITH_CLOUDANT_HOST"
+      value: "054025b7-d25a-46e9-b076-77f1452a9034-bluemix.cloudant.com"
       description: "DB url"
       encoded: false
   gateway: "datapower-gateway"
@@ -123,6 +139,7 @@ paths:
           description: "200 OK"
       tags:
       - "events"
+      summary: "Get all Events"
     post:
       tags:
       - "events"
@@ -150,6 +167,10 @@ paths:
       operationId: "deleteEvent"
       summary: "Delete a event"
       description: "This can only be done by the logged in user."
+    put:
+      responses:
+        200:
+          description: "200 OK"
 definitions:
   EventCategory:
     type: "object"
@@ -269,7 +290,7 @@ definitions:
       error_description:
         type: "string"
         description: "Full error description (including the origin, if any)"
-        example: "User was not authenticated"
+        example: "[Main courante] User was not authenticated"
       error_uri:
         type: "string"
         description: "Help link if relevant"
