@@ -1,5 +1,12 @@
 # Mobile App using APIC & Cloudant with OAuth2 Authentication
 
+
+This Mobile application show how to using API Connect to expose and secure API.
+
+This application allows to create / update / delete an event stored in Cloudant through API Connect.
+
+You need to login with your username/password (Oauth2 and LDAP is behind the scene) and after a successfull login, manage the events using API Connect API (Including GET/POST/PUT/DELETE request).
+
 <img src= ./ressources/draw.io.logicalflow.png>
 
 ## Requirement
@@ -8,7 +15,7 @@ To test this mobile application, you need the following component :
 
 - Ionic 3.x
 - Cordova 6.x or 7.x
-- API Connect instance (on IBM Cloud)
+- API Connect 5.0.8.x instance (on IBM Cloud)
 - Cloudant instance (on IBM Cloud)
 - Chrome as Mobile App Simulator.
 - (Optional) Android or iOS Emulator
@@ -28,6 +35,8 @@ npm install -g cordova
 ```
 
 - Create API Connect instance
+
+https://console.bluemix.net/catalog/services/api-connect?taxonomyNavigation=apis
 
 - Create Cloudant instance
 
@@ -69,6 +78,8 @@ oauth2-oidc-provider_1.0.0.yaml
 - Create a new LDAP User Registry
 
 For this sample we use a public LDAP service : http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/
+
+But you can use an another LDAP registry
 
 In your API Connect instance go in the following menu :
 
