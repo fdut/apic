@@ -8,5 +8,9 @@ export interface cdbEvent {
         title: string;
         description: string;
         timestamp: Date;
+        location : {
+                lat: number;
+                lng: number
+        }
         }
 }
