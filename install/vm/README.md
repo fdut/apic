@@ -442,3 +442,186 @@ If you want to set up another advanced portal site that is tied to another envir
  
 # Appendix A: Troubleshooting
 
+
+# Appendix B: High availability
+
+
+## High availability configurations for the Developer Portal
+
+https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/com.ibm.apic.install.doc/capic_portal_ha_config.html
+
+To prevent database divergence, every functioning Developer Portal server prioritizes data consistency and calculates the total number of functional servers it can communicate with, divided by the total number of servers in the cluster. 
+
+> The total number of functional servers includes the server that performs the calculation. 
+
+**To enable a high-availability cluster, you need to configure a cluster with a minimum of three nodes**; this requirement is due to split brain detection in the database layer. Split brain detection works on a majority voting algorithm, therefore, at least three nodes are required to ensure that the remaining two nodes can detect that they are in the majority at 66% of the cluster. If a node in a cluster of two nodes loses communication with the one other node, then both nodes have only 50% of the cluster and so are not in a majority.
+
+
+To set up a cluster of machines, complete the following steps :
+
+- Define IP/Hostname/DNS/NTP/SMTP/Certs for each node
+- Define Virtual IP
+
+1 Dev Portal Cluster with 3 nodes :
+
+- Portal 1 : devportal1.pot.ibm  192.168.220.20
+- Portal 2 : devportal2.pot.ibm  192.168.220.21
+- Portal 3 : devportal3.pot.ibm  192.168.220.22
+
+<img src='assets/portal.png'>
+
+For each node you want to cluster, do a standard setup for a stand-alone node, as in the topic Installing the Developer Portal (See "Configure the Developer Portal" section in this document) or here : https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/com.ibm.apic.install.doc/tapim_portal_setup_cluster.html.
+
+For each node update /etc/hosts with hostname and ip of other node
+
+On the first node (for example devportal.pot.ibm) you want to cluster, enter the following command:
+
+    set_cluster_members -c
+
+Check status with the following command :
+
+	status
+	
+If the status check is a success, you will receive a message that ends with the following line:
+
+	SUCCESS: All services are Up and the cluster timestamps are in sync
+
+
+Next add additional nodes to the cluster (devportal2, devportal3):
+
+Log in to the new machine and enter the following command:
+
+	set_cluster_members any_available_existing_cluster_member
+
+For example 
+
+	set_cluster_members devportal.pot.ibm
+	
+	
+```
+Found: devportal.pot.ibm(192.168.225.20)
+Configuring cluster node
+Trying the following list of cluster members to find a configured node: 192.168.225.20
+Retrieving cluster configuration from 192.168.225.20 ...
+
+You will be prompted for the admin password for 192.168.225.20 if you have changed
+it from the default and the cluster is not yet completely configured.
+
+Generating database server SSL cert and key
+Adding DHParam to the server-cert
+Server key and cert verified with CA certificate.
+Enabling SSL for database replication traffic
+Enabling SSL for database clients
+Adding Mysql CA Cert for PDO
+Stopping run_site_queue ...
+Starting run_site_queue ...
+Trusting host key for this IBM Developer Portal Node
+SUCCESS: This member is now configured for the cluster
+Got the cluster config from a configured node: 192.168.225.20
+Generating new SSL key for csync2 on this machine
+Creating new csync2 SSL certificate for this machine
+Stopping lsyncd
+Stopping lsyncd ...
+Killing any csync2 client processes
+Killing any csync2 client processes ...
+Killing any run_csync2 client processes
+Killing any run_csync2 client processes ...
+apim_dcluster: Configuring Cluster Members for mysql: 192.168.225.20 192.168.225.21
+apim_dcluster: Configuring Cluster Members for lsync: 192.168.225.20 192.168.225.21
+apim_dcluster: Resetting csync2 databases ...
+apim_dcluster: Configure /etc/lsyncd/lsyncd.conf.lua with 192z168z225z21 192.168.225.21
+Stopping lsyncd
+Stopping lsyncd ...
+Killing any csync2 client processes
+Killing any csync2 client processes ...
+Killing any run_csync2 client processes
+Killing any run_csync2 client processes ...
+Started lsyncd
+Restarting mysql ...
+Waiting for database to be ready ...
+2048-bit Diffie-Hellman Parameter already configured.
+mysql server certificate is already using the correct Diffie-Hellman Parameter.
+Updating Diffie-Hellman Parameter for database SST
+Trusting the host keys of all cluster members
+Setting QUEUE_RUN_STATUS to true
+Flagging run_site_cron to force all sites to resubscribe to their webhooks with the new cluster member list
+
+Full filesystem synchronization now running. This will take anywhere from 5-20 minutes depending
+on cluster size/network speed/hard disk speed. Run 'status' to see when this has completed.
+```
+
+On each node Check status with the following command :
+
+	status
+
+
+Example :
+
+```
+admin@devportal2:~$ status
+Operating System: Ubuntu 16.04.3 LTS
+System version: 7.x-5.0.8.1-20171030-1423
+Distribution version: 7.x-5.0.8.1-20171030-1404
+
+Free disk space: 18G
+ RAM Free/Total: 1843 MB / 3951 MB (46% free)
+   Set Hostname: OK
+     DNS Server: OK
+   APIC SSH Key: OK
+     NTP Server: OK
+Cluster SSH Key: OK
+
+Configuration:
+  APIC Hostname: management.pot.ibm
+  APIC IP: 192.168.225.100
+  Devportal Hostname: devportal2.pot.ibm
+  Devportal IP: 192.168.225.21
+  APIC Certificate Status: INSECURE=1
+
+Cluster members:
+  192.168.225.20 is Active   (Primary)
+  192.168.225.21 is Active   (Primary)
+  192.168.225.22 is Active   (Primary)
+
+Site web check: All sites OK
+
+Site services:
+         Webhooks: All sites Up
+  Background sync: All sites Up
+
+Services:
+  Queue                      is Up
+  Database   [Mysql]         is Up (Primary)
+  Web Server [Nginx]         is Up
+  PHP Pool   [Php7.0-fpm]    is Up
+  Inetd      [Openbsd-inetd] is Up
+  NTP        [Ntp]           is Up
+  REST       [Restservice]   is Up
+  File Sync  [Lsyncd]        is Up
+
+Cluster timestamps:
+  Cluster has 3 active out of 3 configured members. Current system time: Mon, 22 Jan 2018 12:37:55 +0000
+  devportal2.pot.ibm => Mon, 22 Jan 2018 12:37:01 +0000 : 54 seconds behind
+  devportal3.pot.ibm => Mon, 22 Jan 2018 12:37:01 +0000 : 54 seconds behind
+  devportal1.pot.ibm => Mon, 22 Jan 2018 12:37:01 +0000 : 54 seconds behind
+  
+```  
+
+### Test Your Cluster
+
+- Stop the first node 
+- On the second node check the status 
+
+```
+	status
+```
+```
+Cluster members:
+  192.168.225.20 is INACTIVE (Unreachable) <!>
+  192.168.225.21 is Active   (Primary)
+  192.168.225.22 is Active   (Primary)
+```
+
+Access to the Web site for Dev portal.
+
+	https://<vip_of_portal>/<org>/<catalog>
