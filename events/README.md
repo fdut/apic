@@ -136,9 +136,15 @@ Check if your product is published
 
 - Update Mobile App
 
+In the following file :
+
+  events-mobileapp/src/assets/apic.ts
+
+
 Update value of clientID, ClientSecret and APIConnect Endpoint.
 
 ```
+export default
   {
       clientid: 'REPLACE_WITH_YOUR_CLIENTID',
       clientsecret: 'REPLACE_WITH_YOUR_CLIENTSECRET',
@@ -150,6 +156,7 @@ Update value of clientID, ClientSecret and APIConnect Endpoint.
 An example
 
 ```
+export default 
   {
       clientid: '12345678-f92d-4c25-b490-192449f06483',
       clientsecret: 'ABCDEFBmmeX3eX6nV1pP12345K3cS6fM5jV2dB5lU6aE2cW3oD2hN1',
