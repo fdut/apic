@@ -89,7 +89,7 @@ export class AddEventPage {
 
     if (typeof this.authService.getToken() !== "undefined"){
       console.log("Post Request");
-      this.apisService.postEvents(event)
+      this.apisService.postEvent(event)
       .subscribe((data) => { console.log(data);
         const alert = this.alertCtrl.create({
         title: 'Add Event !',
@@ -100,13 +100,17 @@ export class AddEventPage {
         form.reset();
         this.locationIsSet = false;
       }
-      ,(err) => {this.error = 'Unable to connect.';
-        const alert = this.alertCtrl.create({
-        title: 'Failed to add Event !',
-        message: 'Unable to connect.',
-        buttons: ['Ok']
-        });
-        alert.present();}
+      ,(err) => {
+        this.error = 'Unable to connect.';
+        let toast = this.toastCtrl.create({
+        message: "Failed to add Event ! : ",
+        showCloseButton: true,
+        duration: 3000,
+        closeButtonText: 'Ok',
+        position: 'bottom'
+      });
+      toast.present();
+      }
       ,() => {console.log("PostEvents Complete");
       });
    }else{

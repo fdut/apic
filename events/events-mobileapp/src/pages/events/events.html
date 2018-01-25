@@ -15,7 +15,7 @@
     <ion-list>
       <ion-item-sliding *ngFor="let event of events">
         <ion-item
-          (click)="onViewEvent()">
+          (click)="onViewEvent(event)">
           <ion-label>
           <h2>{{ event.doc.title }}</h2>
           <p>{{ event.doc.timestamp  | date: 'EEEE, MMMM d, y, HH:mm:ss' }}</p>

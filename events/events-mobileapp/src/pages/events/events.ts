@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { ApisService } from '../../services/apis';
 import { AuthService } from '../../services/auth';
+
 import { cdbEvent } from '../../assets/event.interface';
+import { ModalController } from 'ionic-angular';
+import { EventPage } from '../event/event';
 
 @IonicPage()
 @Component({
@@ -15,7 +18,9 @@ export class EventsPage {
   events: any;
   error: any;
 
-  constructor(private apisService: ApisService, private authService: AuthService) {
+  constructor(private apisService: ApisService, 
+    private authService: AuthService,
+    private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -27,17 +32,22 @@ export class EventsPage {
     this.onLoadEvent();
   }
 
-  onViewEvent(){
-    console.log("onViewEvent");
+  onViewEvent(event: cdbEvent){
+    console.log("onViewEvent : " + JSON.stringify(event) );
+    const modal = this.modalCtrl.create(EventPage, {event: event});
+    modal.present();
+    modal.onDidDismiss(
+      () => {
+        this.onLoadEvent();
+      }
+    );
   }
 
 
   onDeleteEvent(event: cdbEvent){
-    //console.log("onDeleteEvent: " + JSON.stringify(event) + " _id: " + event.doc._id);
-    
     if (typeof this.authService.getToken() !== "undefined"){
       
-          this.apisService.deleteEvents(event.id,event.doc._rev)
+          this.apisService.deleteEvent(event.id,event.doc._rev)
                 .subscribe((data) => {
                   console.log(data);
                   this.onLoadEvent();
@@ -50,7 +60,6 @@ export class EventsPage {
   }      
     
   onLoadEvent(){
-    
         if (typeof this.authService.getToken() !== "undefined"){
           
                     this.apisService.getEvents()

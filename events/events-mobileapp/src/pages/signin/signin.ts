@@ -53,7 +53,7 @@ export class SigninPage {
         let toast = this.toastCtrl.create({
           message: "Signin failed! : \n" + error.status + ', ' + error._body,
           showCloseButton: true,
-          duration: 10000,
+          duration: 3000,
           closeButtonText: 'Ok',
           position: 'bottom'
         });
