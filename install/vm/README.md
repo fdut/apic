@@ -82,7 +82,9 @@ On the mac, this can be found in /private/etc/hosts.
 
 *	Review the CPU and Memory settings to ensure you will have enough resources to run both virtual machines. 
 
-> Note that DataPower 7.x sets the defaults for 8GB RAM and 8vCPUs, so reduce these to 4GB RAM and 4vCPUs for a “Small” installation (For Dev or no-Prod installation).  
+> Note that DataPower 7.x sets the defaults for 16GB RAM and 8vCPUs, so reduce these to 4GB RAM and 4vCPUs for a “Small” installation (For Dev or no-Prod installation). 
+
+> **Warning** : If you need to apply iFix, set memory to 8GB RAM. You can reduce to 4GB RAM after the iFix is applied. 
 
 *	Power on the virtual machine (it will take a few minutes to boot, but you can continue with the next steps while you wait)
 
@@ -161,7 +163,6 @@ Example ipconfig for VMnet8 that matches this range (if your ipconfig contains a
 3.	Log in with username “admin”, the new password you specified and the default domain.
 4.	Click “I agree” to accept the license.
 5.	The appliance reloads. The next time you log into the console, the wizard is not displayed.
-6.	(7.6) Update Firmware here (**TO BE COMPLETED**)
 
 
  

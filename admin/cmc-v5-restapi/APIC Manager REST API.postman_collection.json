@@ -1,0 +1,281 @@
+{
+	"info": {
+		"name": "APIC Manager REST API",
+		"_postman_id": "ed47c423-06ef-c6df-5fa4-4b023a8e3dbb",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Simple health check API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/servers/self/lb-health-check",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"servers",
+						"self",
+						"lb-health-check"
+					]
+				},
+				"description": "Simple health check API\nhttps://ip_of_mgmt_server/v1/servers/self/lb-health-check?clusterName=name_of_cluster"
+			},
+			"response": []
+		},
+		{
+			"name": "Simple health check API with Details",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<YOUR_PASSWORD>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cmc/admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/servers/self/lb-health-check/details",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"servers",
+						"self",
+						"lb-health-check",
+						"details"
+					]
+				},
+				"description": "Simple health check API\nhttps://ip_of_mgmt_server/v1/servers/self/lb-health-check/details?clusterName=name_of_cluster\n\nAuthentication requise   cmc/"
+			},
+			"response": []
+		},
+		{
+			"name": "CMC – GET the list of existing TLS/SSL Profiles",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<YOUR_PASSWORD>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cmc/admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/cloud/ssl-profiles",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"cloud",
+						"ssl-profiles"
+					]
+				},
+				"description": "CMC – GET the list of existing TLS/SSL Profiles"
+			},
+			"response": []
+		},
+		{
+			"name": "CMC – GET Cloud Manager information",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<YOUR_PASSWORD>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cmc/admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/cloud/",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"cloud",
+						""
+					]
+				},
+				"description": "CMC – GET Cloud Manager information"
+			},
+			"response": []
+		},
+		{
+			"name": "CMC – GET the list of Gateway Clusters",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<YOUR_PASSWORD>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cmc/admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/gatewayClusters",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"gatewayClusters"
+					]
+				},
+				"description": "CMC – GET the list of Gateway Clusters"
+			},
+			"response": []
+		},
+		{
+			"name": "CMC – GET the list of servers (mgmt & gateways)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<YOUR_PASSWORD>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cmc/admin",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.100/v1/servers",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"100"
+					],
+					"path": [
+						"v1",
+						"servers"
+					]
+				},
+				"description": "CMC – GET the list of servers (mgmt & gateways)"
+			},
+			"response": []
+		}
+	]
+}
