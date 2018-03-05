@@ -174,7 +174,7 @@ in **events-mobileapp** folder launch the following command :
 ionic serve -w "google chrome"
 ```
 
-S
+
 ![Mobile App Screenshot](./ressources/eventsscreenshot.gif)
 
 ![Mobile App Screenshot](./ressources/eventsapiscreenshot.gif)
