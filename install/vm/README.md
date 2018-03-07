@@ -443,6 +443,41 @@ If you want to set up another advanced portal site that is tied to another envir
  
 # Appendix A: Troubleshooting
 
+## Issue during (Portal) OVA deployment
+
+Deploying the OVA via the vSphere Client fails.
+
+You see this error:
+
+    The OVF package is invalid and cannot be deployed.
+    The following manifest file entry (line 1) is invalid: SHA256 (xxxxxxx.ovf).
+
+### Cause
+
+This issue occurs because the vSphere Client does not support the SHA256 hashing algorithm, which the latest VIC OVA was made of (from 1.1.1).
+ 
+It also affects any OVA deployments via PowerCLI when using the Get-Ovf Configuration cmdlet.
+
+### Resolution
+
+To resolve this issue, deploy vIC via the vSphere Web Client or ESXi Embedded Host Client because both support SHA256.
+ 
+However, if you still want to automate your deployments, you must convert the OVA from the Cryptographic Hash Algorithm SHA256 to SHA1.
+
+To do this, you can use OVFTool which is available on all OS at: https://www.vmware.com/support/developer/ovf/
+
+To do the conversion, run this command:
+
+```
+ovftool.exe --shaAlgorithm=SHA1 /path/to/the/original/ova_file.ova /path/to/the/new/ova/file-SHA1.ova
+```
+
+You can now use the new ova generated with SHA1 for your future deployments without experiencing any format error.
+
+
+
+https://kb.vmware.com/s/article/2151537
+
 
 # Appendix B: High availability
 
