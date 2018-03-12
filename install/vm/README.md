@@ -218,9 +218,9 @@ The Statistics Service must be enabled in the Gateway Server to allow the Cloud 
 
 1.	If you need to update your DataPower OS, follow these steps otherwise, you can skip to the next section.
 2.	In the DataPower WebGUI, select Administration > Main > System Control
-3.	In the Boot Image section, click Upload and select the x*****.scrypt4 fixpack file.
+3.	In the Boot Image section, click Upload and select the *****.scrypt4 fixpack file (for Example "idg7604.scrypt4" for fix 4 of IBM Datapower Gateway Virtual Appliance 7.6 )
 4.	Click the Continue button once the file has been uploaded successfully.
-5.	In the Boot Image section, ensure x*****.scrypt4 is selected, check the “I accept the terms of the license agreements” checkbox, and click the Boot Image button.
+5.	In the Boot Image section, ensure *****.scrypt4 is selected, check the “I accept the terms of the license agreements” checkbox, and click the Boot Image button.
 6.	Click the Confirm button in the pop up window (you can ignore the warning “Firmware does not contain supported feature 'DCO-Oracle'.” since this is not required for APIM), wait for the action to complete and then click Close on the pop up window.
 7.	Wait for the system to reboot, and log back into the WebGUI (you can check the reboot output in the VMware console, the WebGUI should work once the login prompt is displayed).
 8.	Verify the version has been updated on the bottom left of the navigation menu on the left side of the screen.
