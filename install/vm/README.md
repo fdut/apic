@@ -479,6 +479,12 @@ You can now use the new ova generated with SHA1 for your future deployments with
 https://kb.vmware.com/s/article/2151537
 
 
+## Issue during OVA deployment "OVF package with compress disks is not supported"
+
+See this link : http://www.diyar.online/2016/12/vmware-vsphere-6-5-ovf-package-compressed-disks-not-supported-ovf-import/
+
+
+
 # Appendix B: High availability
 
 
