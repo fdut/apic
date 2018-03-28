@@ -13,13 +13,21 @@ http://banka.mybluemix.net/home/index.html
 
 http://banka.mybluemix.net/services/AccountService?wsdl
 
+
+
 # Create Product "bankproduct"
 
+> Un produit contient des APIs et le contrat d'utilisation de ces APIs (Quotas, Visibilité, Monétisation etc ...)
 
 Name: **bankproduct**
 
 # Create API
 
+> Dans un premier temps, l'objet de cette API est de retourner le solde d'un compte client. Le compte client (accountId) est placé dans le chemin de la requête.
+
+<img src="img/flow.jpg">
+
+- Menu > Draft > API > Add > New API
 
 - Name: **bank**
 
@@ -42,17 +50,17 @@ Name: **bankproduct**
 ```
 	accountValue   Type String    {“accountValue”: “76628730”}
 ```
-- Creation du service
+- Add service
 
-	- import du wsdl : http://banka.mybluemix.net/services/AccountService?wsdl
+	- import wsdl : http://banka.mybluemix.net/services/AccountService?wsdl
 
 - Open Assemble panel
 
--  Remove invoke policy
+- Remove existing **invoke** policy
 
--  Drag and drop getBalance policy
+- Drag and drop **getBalance** policy
 
-- Edit input
+- Edit **getBalance: input**
 
 <img src="img/getBalanceInputEdit.png">
 
@@ -63,7 +71,7 @@ none 							integer
 <img src="img/getBalanceInput.png">
 
 
-- map input
+- map **getBalance: input**
 
 ```	
 map property : accountId  with ----> arg0
@@ -72,7 +80,7 @@ map property : accountId  with ----> arg0
 
 
 
-- Edit output
+- Edit **getBalance: output**
 
 <img src="img/getBalanceOutputEdit.png">
 
@@ -84,14 +92,16 @@ message.body					ouput
 application/json    			def/jsonResponse
 ```
 
-- map output
+- map **getBalance: output**
 
 ```	
 map property : return  with ----> accountValue
 ````
 <img src="img/getBalanceOutputmapping.png">
 
-# Test (2 min)
+# Test
+
+- Clic on the Test button
 
 <img src="img/test.png">
 
@@ -101,20 +111,26 @@ map property : return  with ----> accountValue
 
 - Test
 
-
+***
+> 
+> Durant cette premiére partie, nous avons montrer les points suivants :
+> * Créer une API
+> * Intégrer un web service (SOAP) existant
+> * Utiliser les composants de mapping de la solution API Connect
+> * Créer un produit d'API
+> * Tester une API
+> 
 
 # Update API
 
+> Dans un deuxiéme temps, nous ajoutons la capacité de retourner la valeur d'une action pour une entreprise donnée. Pour cela nous allons intégrer une API tiers nommé **Quote** et disponible ici : http://dev.markitondemand.com/MODApis/Api/v2/doc 
 
-- Add Quote API
-
- 	-> Doc : http://dev.markitondemand.com/MODApis/Api/v2/doc
-
-- Add Path
+- In the same API, Add the following Path
 
 ```
 GET /getquote
 ```
+(expand GET /getquote)
 
 - Add Parameter
 
@@ -123,27 +139,27 @@ symbol 	Path	required	string
 ```
 <img src="img/getQuoteParameters.png">
 
-- Assemblage
+- Clic **Assemblage**
 
-- Add condition switch
+- Add **Condition switch**
 
 <img src="img/getQuoteSwitch.png">
 
-- Add invoke for /getquote
+- Drag and Drop **invoke** policy for /getquote path
 
 <img src="img/assembly1.png">
 
-- update url
+- Update url
 
 http://$(Hostname)/MODApis/Api/v2/Quote?symbol=$(request.parameters.symbol)
 
 <img src="img/updateinvoke.png">
 
+- Go back to **Design** and Add **property**
 
-- Add property
-
+```
 Hostname dev.markitondemand.com
-
+```
 <img src="img/properties.png">
 
 - Save
@@ -164,12 +180,22 @@ See xml result
 
 ## Add XML to JSON
 
+> Maintenant nous souhaitons retourner la réponse au format JSON plus que XML. Il existe un composant pour cela. Il suffit simplement de faire un Drag & Drop de la politique "XML to JSON"
+
 - Drag and drop "XML to JSON" to getQuote flow
 
 <img src="img/assembly2.png">
 
 - Save
 - Test
+
+***
+> 
+> Durant cette deuxième partie, nous avons montrer les points suivants :
+> * Mise à jours une API
+> * Utiliser les composants de routage et de transformation de la solution API Connect
+> * Tester une API
+> 
 
 # Back to the product
 
@@ -191,12 +217,23 @@ See xml result
 
 - Show Analytic
 
+***
+> 
+> Durant cette troisième partie, nous avons montrer les points suivants :
+> * Définition d'un plan d'API
+> * Publication, souscription à une API depuis le portail développeur.
+> * Test depuis le Portail développeur.
+> * Decouverte de la partie Analytics
+
+
+Final version of API are available here : [all api] 
+
+[all api]: /apis "Title"
 
 
 
-(Option)
 
-# Micro Service
+# Micro Service (Optional)
 
 In command line
 

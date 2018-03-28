@@ -1,0 +1,30 @@
+---
+product: "1.0.0"
+info:
+  name: "bankproduct"
+  title: "bank product"
+  version: "1.0.0"
+visibility:
+  view:
+    enabled: true
+    type: "public"
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: "authenticated"
+    tags: []
+    orgs: []
+apis:
+  bank:
+    $ref: "bank_1.0.0.yaml"
+  oauth4bank:
+    $ref: "oauth4bank_1.0.0.yaml"
+plans:
+  default:
+    title: "Default Plan"
+    description: "Default Plan"
+    approval: false
+    rate-limit:
+      hard-limit: true
+      value: "100/1minute"
