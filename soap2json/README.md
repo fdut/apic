@@ -228,7 +228,7 @@ See xml result
 
 Final version of API are available here : [all api] 
 
-[all api]: /apis "Title"
+[all api]: apis "Title"
 
 
 
