@@ -1,1 +1,4 @@
 https://apiconnect-c2857335-e0f6-4bd5-9e61-b8be74ed7d20.fdutorg-dev.apic.eu-de.mybluemix.net
+
+
+$(runtime-url)$(request.path)$(request.search)
