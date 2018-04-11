@@ -1,5 +1,49 @@
+# Simply API
+--------------
 
-Exemple SOAP to RESP API (Create Your API in 5 min)
+1. Open Draft panel in API Manager
+
+2. Test the backend service (ie the service that will be proxied)
+	
+	The backend service is located here: [https://myweatherprovider.mybluemix.net/current?zipcode=90210](https://myweatherprovider.mybluemix.net/current?zipcode=90210). Go ahead and try it out on a Web browser to make sure its available. 
+
+```
+	{
+		"zip":"90210",
+		"temperature":61,
+		"humidity":93,
+		"city":"Beverly Hills",
+		"state":"California"
+	}
+	
+```
+
+3. Import Weather API definitions file. Click the **Add (+)** button and select **Import API from a file or URL**. 
+	* [https://raw.githubusercontent.com/ozairs/apiconnect/master/getting-started/weather-provider-api_1.0.0.yaml]() 
+    * Click the **Weather Provider API** API. In the **Design** tab, make a note of a few items:
+    *
+    	* API exposed on the path `/current` & `/today`
+    	
+		![alt](img/paths.png)
+		
+		* Click the **Assemble** tab at the top. You will notice multiple `Invoke` actions. It currently references a service deployed [here] (https://myweatherprovider.mybluemix.net/current).
+		
+The API designer includes a built-in test tool, so you don't need any external tool to perform a quick validation. 
+
+### Test
+
+6. Click the **Play icon** ![alt](img/play.png) to open the built-in test tool. 
+
+7. Select the **get /current** operation and enter the zipcodem `90210`. 
+
+8. Click the **Invoke** button to test the API. The first time you test, you will get security warning so open the link to accept the self-signed certifcate. 
+
+9. Click the **Invoke** button again to see the same weather REST response but this time its executed via the API Gateway.
+
+
+
+
+# Exemple SOAP to RESP API (Create Your API in 5 min)
 ------------------------
 
 https://developer.ibm.com/apiconnect/resources/exposing-soap-service-rest-api-hands-tutorial/
@@ -192,7 +236,7 @@ See xml result
 ***
 > 
 > Durant cette deuxième partie, nous avons montrer les points suivants :
-> * Mise à jours une API
+> * Mise à jours d'une API
 > * Utiliser les composants de routage et de transformation de la solution API Connect
 > * Tester une API
 > 
@@ -228,7 +272,255 @@ See xml result
 
 Final version of API are available here : [all api] 
 
+https://raw.githubusercontent.com/fdut/apic/master/soap2json/apis/bank_1.0.0.yaml
+
 [all api]: apis "Title"
+
+# Add OAuth Security to your API
+
+> Dans cette partie nous allons montrer comment sécuriser une API
+
+## Objective
+
+In this lab, you will secure your Bank API to protect the resources exposed by **ThinkIBM**. Consumers of your API will be required to obtain and provide a valid OAuth token before they can invoke the Bank API.
+
+You will learn:
+
++ How to create an OAuth 2.0 Provider, specifically using the Resource Owner Password grant type.
++ How to clone a new version of an API.
++ How to secure the new version of your API using an OAuth 2.0 Provider.
+
+## Create OAuth API
+
+1.  Return to the Draft (API Designer) tab in your browser.
+
+1.  Go to API tab
+
+1.  Click the `+ Add` button and select `OAuth 2.0 Provider API` from the menu.
+
+1.  Specify the following properties and click the `Create API` button to continue.
+
+    > Title: `oauth`
+    > 
+    > Name: `oauth`
+    > 
+    > Base Path: `/`
+    > 
+    > Version: `1.0.0`
+	
+**IMPORTANT** : Make sure the **Base Path** setting is correct.
+ 
+
+1.  The API Editor will launch. If this is your first time using the API Editor, you will see an informational message. When you are ready to proceed, click the `Got it!` button to dismiss the message.  
+	
+    The API Editor opens to the newly created `oauth` API. The left hand side of the view provides shortcuts to various elements within the API definition: Info, Host, Base Path, etc. By default, the API Editor opens to the `Design` view, which provides a user-friendly way to view and edit your APIs.
+
+1.  Use the palette on the left to navigate to the `OAuth 2` section.
+
+    Over the next several steps, we will set up OAuth-specific options, such as client type (public vs confidential), valid access token scopes, supported authorization grant types, etc. The [OAuth 2.0 Specification](http://tools.ietf.org/html/rfc6749){:target="_blank"} has detailed descriptions of each of the properties we are configuring here.
+
+1.  For the `Client type` field, click the drop down menu and select `Confidential`.
+
+    ![](./img/oauth2-client-type.png)
+
+1.  Three scopes were generated for you when the OAuth API Provider was generated: `scope1`, `scope2`, `scope3`.
+
+1.  Modify the values for `scope1`, set the following fields:
+
+    > Name: `inventory`
+    > 
+    > Description: `Access to bank API`
+
+    Delete `scope2` and `scope3` by clicking the trashcan icons to the right of the scope definitions.
+    
+>Note :The scope defined here must be identical to the scope that we define later when telling the `bank` API to use this OAuth config. A common mistake is around case sensitivity. To avoid running into an error later, make sure that your scope is set to all **lowercase**.
+
+   ![](./img/oauth2-scopes.png)
+
+1.  We want to configure this provider to *only* support the Resource Owner Password Credentials grant type. Deselect the `Implicit`, `Application` and `Access Code` Grants, but leave `Password` checked.
+
+    ![](./img/oauth2-grants.png)
+
+1.  In the **Identity extraction** section, set the `Collect credentials using` drop-down menu to `Basic`.
+
+    ![](./img/oauth2-id-extraction.png)
+
+1.  In the **Authentication** section, set the following fields:
+
+    > Authenticate application users using: `Authentication URL`
+    > 
+    > Authentication URL: `https://thinkibm-services.mybluemix.net/auth`
+    
+    ![](./img/oauth2-authentication.png)
+
+1.  Scroll down to the **Tokens** section, turn off the `Enable revocation` option.
+    
+    ![](./img/outh2-tokens.png)
+
+1.  Click the `Save` icon in the top right corner of the editor to save your changes.
+
+    ![](./img/save.png)
+
+1.  Click on the `<- All APis` link to return to the draft API list.
+
+## Save as New Version
+
+1.  Click on the `bank 1.0.0` API to open the API designer.
+
+1.  At the top right-hand corner of the screen, click on the menu icon to expand additional options.
+
+1.  Select the option to `Save as a new version`.
+
+    ![](./img/save-new-version.png)
+
+1.  Enter the new version number as `2.0.0` and click the `Save as new version` button.
+
+    ![](./img/new-version-number.png)
+
+
+## Apply an OAuth Security Policy
+
+1.  Navigate to the `Security Definitions` section.
+
+    Click the `+` icon in the **Security Definitions** section and select `OAuth` from the menu.
+	
+    ![](./img/api-new-security-definition.png)
+	
+    A new security definition is created for you, called `oauth-1 (OAuth)`.
+
+1.  Scroll down to edit the newly created security definition.
+
+    Set it to have the following properties:
+	
+    > Name: `oauth`
+    > 
+    > Description: `Resource Owner Password Grant Type`
+    > 
+    > Flow: `Password`
+    > 
+    > Token URL: `<Catalog Gateway Endpoint>/oauth2/token`
+
+    The Token URL will be based upon the location of your Org and Space running on Bluemix public.
+        <br/><br/>
+    You can find your Gateway Endpoint URL by logging into Bluemix and launching the API Connect service, then navigate into your catalog (the default catalog created is `Sandbox`).
+        <br/><br/>
+    From there go into `Settings`, then choose the `Gateways` option from the side menu palette. Locate the **ENDPOINT**, simply copy and paste the contents into the Token URL field of your API OAuth settings, then append `/oauth2/token`.
+
+
+    ![](./img/bmx-api-endpoint.png)
+   
+	{% include tip.html content="
+	    You will need the Gateway Endpoint URL later. Save the Gateway Endpoing URL value to a text editor for easy access.
+    %}
+    
+    ![](./img/api-oauth-settings-1.png)
+
+1.  Click the `+` icon in the **Scopes** section to create a new scope. Set the following properties. Note the organization portion of the token URL will be different for each student.
+
+    > Scope Name: `inventory`
+    > 
+    > Description: `Access to all bank resources`
+	
+    ![](./img/api-oauth-settings-2.png)
+
+1.  Navigate to the `Security` section and check the `oauth (OAuth)` checkbox.  
+
+    ![](./img/api-security.png)
+	
+1.  Save your changes.
+
+    ![](./img/save.png)
+
+1.  Click on the `<- All APis` link to return to the draft API list.
+
+## Continue
+
+Now you have a new version of the Inventory API that is secured using an OAuth provider. In the next lab, you will use the IBM API Connect Management Server's lifecycle controls to replace the running version 1.0.0 with the new version 2.0.0.
+
+
+## Create a New Product
+
+1.  Click on the `Products` tab in your API Connect Toolkit.
+
+1.  Click on the `Add +` button and select `New Product`.
+
+1.  Title this product `Secure Bank` and click on the `Create Product` button.
+
+1.  Navigate to the APIs section. Click on the `+` button to add APIs to this Product.
+
+1.  Select the `bank 2.0.0` and `oauth 1.0.0` APIs, then click the `Apply` button.
+
+1.  Save the Product.
+
+1. Publish the Product
+
+## Replace the Old Product
+
+1.  Switch to the **Dashboard** view:
+
+    ![](./img/switch-apic-dashboard.gif)
+
+1.  Click on the **Sandbox** catalog tile to open the catalog configuration screen.
+
+1.  The `Products` tab will list all of the API Products that this Catalog is currently managing.
+
+    Notice that the `bankproduct 1.0.0` product is in a `Published` state. 
+    
+    Also notice that your new `secure bank` product is available in a Staged state.
+    
+1.  Click on the menu options for the `secure bank` product and select the `Replace an existing product` option.
+
+    ![](./img/replace-existing-product.png)
+
+1.  Select the `bankproduct 1.0.0` product, since this is the one we are replacing. Then click the `Next` button.
+
+1.  In order to maintain our consumers' entitlements, we need to migrate their plan subscriptions.
+
+    Both of our Products have plans called `Default Plan`, here you will choose to move subscribers from the `bankproduct` Product's default plan to the `secure bank` Product's default plan.
+    
+    In the drop-down menu, select `Default Plan`, then click on the `Replace` button.
+    
+1.  The API Manager will take care of retiring the old product and publishing the new one.
+
+## Test you API in Portal
+
+1.  Open your API Portal in a new browser tab and log in with your developer account.
+
+    If you closed the tab from earlier and don't have it bookmarked, you can follow these steps to find your API Portal URL:
+    
+    
+1.  Click on the `API Products` tab.
+
+1.  Notice that the old `bankproduct` product is no longer available. It has been replaced by your new `secure product` product.
+
+1.  Click on the `secure product` product.
+
+
+	Note: There is no need to re-subscribe your application! Using the `Replace` state change control migrated your subscription for you, so you're already entitled to the API's contained in the new Product's Default Plan - including the `oauth` API.
+
+1.  Click on the `bank` API from the palette menu on the left.
+
+1.  Select the `GET /getbalance/{accountId}` operation. Notice that we now have an additional OAuth security requirement defined.
+
+1.  Scroll down to browse the invocation form.
+
+1.  Select your subscribed application from the `Client ID` drop-down menu.
+
+1.  Paste your secret into the `Client secret` field.
+
+1.  In the `Username` and `Password` fields, you can enter any text.
+
+Note: Recall that when we configured the OAuth API, we provided an Authentication URL as the method for validating the user credentials. The URL that we provided will respond back OK with any credentials.
+
+1.  Click on the `Authorize` button to obtain an OAuth token.
+
+    The API Portal will call out to the OAuth Token URL with your client credentials and user credentials.
+    
+    The OAuth API which you built in previous will intercept the request, validate the credentials, and generate a token.
+    
+1.  Click on the `Call operation` button to invoke the API. The request will include the OAuth bearer token in the `Authorization` header.
+
+1.  To prove that the token is being validated, you can either remove or modify the contents of the `Access Token` field, then click the `Call operation` button again and see the `401 Unauthorized` error response.
 
 
 
@@ -247,7 +539,7 @@ In command line
 
 ```
 	apic edit
-````
+```
 
 - Create datasource
 
@@ -267,7 +559,8 @@ account
 accountId number id
 agence number
 name string
-````
+
+```
 <img src="img/apicloopbackmodel1.png">
 <img src="img/apicloopbackmodel2.png">
 
