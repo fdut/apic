@@ -1,27 +1,53 @@
 # Proof of Technology API Connect
 
 
-## Lab 1 : Exposition d'une API Rest via API Connect
+## Lab 01 : Exposition d'une API Rest via API Connect
 
-> Imaginons que notre banque propose déjà des APIs REST en interne. L'objet de cet exercice est de montrer comment exposer une API existante avec API Connect
+## Objectif 
+
+> Imaginons que notre banque *(Bank A)* propose déjà des APIs REST en interne et qu'elle souhaite les exposés via une solution d'API Management.
+
+>L'objet de cet exercice est de montrer comment exposer une API existante avec API Connect
 
 > Afin d'illustrer cet exemple nous allons intégrer une API tiers nommé **Quote** et disponible ici : http://dev.markitondemand.com/MODApis/Api/v2/doc
 
-> Pour le nom d'un entreprise côté en bourse, cette API retourne la valeur courante d'une action. 
+> L'API **QUote** propose de retourner la valeur courante d'une action pour le nom d'un entreprise côté en bourse. 
 
-< METTRE IMAGE ICI >
+```
+Quote
+http://dev.markitondemand.com/Api/v2/Quote
+The Quote method requires the following input parameters
+
+Field	Type	Description
+symbol	String	Ticker symbol
+
+When successful, the Quote method returns a serialized StockQuote object.
+```
 
 
-Pour cet exercice nous allons travailler directement dans l'environnement "Bac à Sable" (Sandbox) de l'API Manager sur IBM Cloud.
+>Pour cet exercice nous allons travailler directement dans l'environnement "Bac à Sable" (Sandbox) de l'API Manager sur IBM Cloud.
 
 
-- Ouvrir le l'onglet "Brouillon" dans API Manager
+- Ouvrir l'onglet "Brouillon" dans API Manager
 
 ![alt](img/draftfr.gif)
 
-#### Créer un nouveau produit nommé : **bankproduct**
+## Créer un nouveau produit nommé : **bankproduct**
+---
 
-Cliquer ->  **Brouillon** *(Draft)* > **Produits** *(Product)* > **Ajouter** *(Add)* > **Nouveau produit** *(New Product)*
+Dans le contexte de API Connect un **Produit** contient les informations suivantes :
+
+* Informations contractuelles	d'usage des APIs
+* La visibilité vis à vis des développeurs d'application
+* Les API disponibles via ce produits d'API
+* Les Plans associés. Incluant les notions de quotas et de monétisations des APIs disponibles via ce Produits d'APIs
+* Catégories relatives aux APIs de ce Produit.
+
+
+
+
+
+Cliquer sur ->  **Brouillon** *(Draft)* > **Produits** *(Product)* > **Ajouter** *(Add)* > **Nouveau produit** *(New Product)*
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -32,16 +58,8 @@ Version       | 1.0.0
 ![alt](img/nouveauproduit.gif)
 
 
-Dans le contexte de API Connect un **Produit** contient les informations suivantes :
-
-* Informations contractuelles	d'usage des APIs
-* La visibilité vis à vis des développeurs d'application
-* Les API disponible via ce produits d'API
-* Les Plans associés. Incluant les notions de quotas et de monétisations des APIs disponibles via ce Produits d'APIs
-* Catégories relatives aux APIs de ce Produit.
-
-
-#### Créer une nouvel API : **bank**
+## Créer une nouvelle API : **bank**
+---
 
 Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* > **Ajouter** *(Add)* > **Nouvelle API** *(New API)*
 
@@ -67,38 +85,36 @@ Libéllé       | Valeur
 Chemin        | getQuote
 
 
-- Ajouter le  **Paramêtre** *(Parameter)* nommé **symbol**
+- Ajouter le **Paramêtre** *(Parameter)* nommé **symbol**
 
 > Rappelez vous que dans la description de l'API le paramêtre "symbol" doit contenir l'identifiant de la compagnie côté en bourse pour laquelle on recherche la valeur de l'action.
 > http://dev.markitondemand.com/MODApis/Api/v2/doc
 
 Cliquer ->  **Concevoir** *(Design)* > **Chemins** *(Path)* > **getQuote** > **Ajouter un Paramêtre** 
 
-- Add Parameter
+- Ajouter un Parametre
 
 Libéllé       | Valeur
 ------------- | -------------
-Nom			    | symbol
+Nom			      | symbol
 Situé dans    | requête *(query)*
 Requis        | Coché
-
 
 ![alt](img/parametresymbol.gif)
 
 
-Une fois définit les éléments de l'API requis il reste a finaliser les rêgles d'assemblage.
+Une fois définit les éléments de l'API requis, il reste a finaliser les rêgles d'assemblage.
 
 API Designer comporte une vue d'assemblage que vous pouvez utiliser pour créer des assemblages. 
 Cette vue contient une palette qui répertorie les diférentes politiques disponibles (Logique, Transformation, Sécurité etc ...) .
 
-Cliquer ->  **Assembler** *(Assemble)*
+Cliquer sur ->  **Assembler** *(Assemble)*
 
 ![alt](img/gotoassemble.gif)
 
+Par defaut un politique **invoke** est déja disponible. Nous allons juste la configurer pour pointer sur l'API "Markit On Demand" utilisée pour cet exemple.
 
-Par defaut un politique **invoke** est déja disponible. Nous allons juste la configurer pour pointé sur l'API "Markit On Demand" utilisé pour cet exemple.
-
-Cliquer sur  **Invoke** et copier/coller l'url ci-dessous de l'API *Quote* de "Markit On Demand"
+Cliquer sur  **Invoke** et copier/coller, dans le champ URL dans le panneau de droite, l'url ci-dessous de l'API *Quote* de "Markit On Demand"
 
 ```
 http://dev.markitondemand.com/MODApis/Api/v2/Quote?symbol=$(request.parameters.symbol) 
@@ -114,14 +130,13 @@ http://dev.markitondemand.com/MODApis/Api/v2/Quote?symbol=$(request.parameters.s
 
 La conception en l'API est maintenant terminé.
 
-#### Tester votre nouvel API : **bank**
+## Tester votre nouvel API : **bank 1.0.0**
+---
 
+- Cliquer sur l'icone **Test** pour ouvrir le panneau des outils de test.
 
-- Cliquer sur l'icon **Test** 
+<img src="img/play2.png" alt="actions" style="width: 350px;"/> 
 
-![alt](img/play2.png) 
-
-pour ouvrir le panneau des outils de test.
 
 - Selectionner le catalogue **Sandbox** (Selectionné par défaut)
 - Selectionner le produit **bankproduct 1.0.0** (Précédèment créé)
@@ -130,10 +145,9 @@ pour ouvrir le panneau des outils de test.
 
 ![alt](img/opentest.gif) 
 
-
 - Cliquer sur **Republier le produit** 
-- Selectionner l'opération **get getQuote** (Précédèment créé)
-- Mettre comme **IBM** valeur pour le paramêtre *symbol*
+- Selectionner l'opération **get getQuote**
+- Mettre comme **IBM** (ou MSFT, AAPL) valeur pour le paramêtre *symbol*
 - Puis cliquer sur le bouton **Appeler**
 
 Le résultat devrait avoir le forme suivante
@@ -164,37 +178,39 @@ Le résultat devrait avoir le forme suivante
 
 > Si le message suivant apparait cliquez sur le lien et recomencer l'opération.
 > 
-``` Code de statut: -1
+``` 
+Code de statut: -1
 Aucune réponse reçue. Il se peut que CORS ne soit pas pris en charge sur le serveur cible, que le serveur ne soit pas disponible ou qu'un certificat non digne de confiance ait été rencontré.
 Si vous cliquez sur le lien ci-dessous, le serveur s'ouvre dans un nouvel onglet. Si le navigateur affiche un problème lié au certificat, vous pouvez l'accepter et revenir ici pour procéder à de nouveaux tests.
 https://api.au.apiconnect.ibmcloud.com/fdutorg-sydneydev/sb/bank/getQuote?symbol=IBM
 ```
 
-#### Ajouter une politique de transformation : **bank**
+## Ajouter une politique de transformation à l'API **bank**
+---
 
-Comme nous l'avons vu le format du message retourné par l'API Quote de "Markit On Demand" est du XML or les applications Web ou Mobile préfére manipuler des messages au format JSON.
+Comme nous l'avons vu le format du message retourné par l'API **Quote** de "Markit On Demand" est du XML or les applications Web ou Mobile préféres manipuler des messages au format JSON.
 
 Il est trés simple avec API Connect de transformer le format XML vers JSON avec la politique de transformation "XML en JSON"
 
-Ouvrer l'API **bank 1.0.0**
+Ouvrir l'API **bank 1.0.0**
 
-- Cliquer ->  **Brouillon** *(Draft)* > **API** *(Product)* > **bank 1.0.0**
+- Cliquer sur ->  **Brouillon** *(Draft)* > **API** *(API)* > **bank 1.0.0**
 - Cliquer ensuite sur l'onglet **Assembler**
-- Selectionner dans la palette la politique **XML en JSON**
+- Sélectionner dans la palette la politique **XML en JSON**
 - Puis faite un Déplacer/Poser de la politique **XML en JSON** juste derrière la politique **invoke**
+- Et c'est tout ...
 
 ![alt](img/xml2json.gif) 
 
 - **Sauvegarder**
 
-#### Tester la modification de l'API : **bank**
+## Tester la modification de l'API : **bank 1.0.0**
+---
 
+- Cliquer sur l'icone **Test** pour ouvrir le panneau des outils de test.
 
-- Cliquer sur l'icon **Test** 
+<img src="img/play2.png" alt="actions" style="width: 350px;"/> 
 
-![alt](img/play2.png) 
-
-pour ouvrir le panneau des outils de test.
 
 - Cliquer sur **Republier le produit** 
 - Selectionner l'opération **get getQuote**
@@ -265,10 +281,15 @@ xml-to-json
 
 ![alt](img/testxml2json.gif)
 
-***
-> 
-> Durant cet exercice nous avons créer et tester une API dans API Connect.
-> Nous avons aussi vu comment utiliser des politiques dans l'outil d'assemblage.
-> Dans l'exercice suivant, Nous allons maintenant voir comment publier cette API (via son Produit d'API) et comment la consommer via une application Web.
+## Résumé
+---
+ 
+Durant cet exercice nous avons créer et tester une API dans API Connect.
+
+Nous avons aussi vu comment utiliser des politiques dans l'outil d'assemblage.
+
+Dans l'exercice suivant, Nous allons maintenant voir comment publier cette API (via son Produit d'API) et comment la consommer via une application Web.
  
 
+---
+2018 - frederic_dutheil@fr.ibm.com

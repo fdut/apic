@@ -1,23 +1,24 @@
 # Proof of Technology API Connect
 
-# Lab4 : Securiser une API avec OAuth2 
-
+## Lab4 : Securiser une API avec OAuth2 
 
 ## Objectif 
 
-
-Dans cet exercice, nous allons sécuriser l'API **bank** pour protéger les ressources exposés par Bank A. Les consommateurs des API devront obtenir un token OAuth valide avant de pouvoir invoquer l'API **bank**
+Dans cet exercice, nous allons sécuriser l'API **bank 1.0.0** pour protéger les ressources exposés par Bank A. Les consommateurs des APIs devront obtenir un token OAuth valide avant de pouvoir invoquer l'API **bank**
 
 Nous allons donc voir les points suivants:
 
-+ Comment un provider OAuth2 How to create an OAuth 2.0 Provider, specifically using the Resource Owner Password grant type.
++ Comment créer un fournisseur OAuth 2.0
 + Comment cloner une API pour en générer une nouvelle version.
-+ Sécuriser une API via un Provider OAuth 2.0 
++ Sécuriser une API via un fournisseur OAuth 2.0 
 
+> Nous allons commencer par créer une nouvelle version de l'API **bank**
+>
 
-### Créer une nouvelle version de l'API **bank 1.0.0**
+## Créer une nouvelle version de l'API **bank 1.0.0**
+---
 
-- Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
+- Cliquer sur ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
 - Dans le coin a droite de l'écran, cliquer sur l'icone
 <img src="img/plusdaction.png" alt="actions" style="width: 25px;"/> 
 - Selectionner l'option : **Sauvegarder sous une nouvelle version**
@@ -30,9 +31,10 @@ Nous allons donc voir les points suivants:
 > La version **bank 1.0.0** sera l'API non sécurisé et la version **bank 2.0.0** sera l'API sécurisé via OAuth 2.0
 > 
 
-### Créer une API OAuth 2.0
+## Créer un fournisseur OAuth 2.0
+---
 
-Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* > **Ajouter** *(Add)* > **API du fournisseur OAuth 2.0** 
+Cliquer sur -> **Brouillon** *(Draft)* > **API** *(API)* > **Ajouter** *(Add)* > **API du fournisseur OAuth 2.0** 
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -160,15 +162,14 @@ En cas de succès un jeton est retourné et sera utiliser pour appeler l'action 
 
 ![alt](img/testoauthapi.gif)
 
-## Synthése
-> 
-> Durant cet exercice, nous avons montrer les points suivants :
-> 
-> - Création d'une nouvelle version d'une API existante 
-> - Creation d'une API OAuth 2.0
-> - Securisation d'une API via OAuth 2.0
+## Résumé
+---
 
->
+Durant cet exercice, nous avons montrer les points suivants :
+ 
+- Création d'une nouvelle version d'une API existante 
+- Creation d'une API OAuth 2.0
+- Securisation d'une API via OAuth 2.0
 
 ---
 

@@ -1,7 +1,6 @@
 # Proof of Technology API Connect
 
-# Lab3 : Routing et Service SOAP 
-
+## Lab 03 : Routing et Service SOAP 
 
 ## Cas d'usage 
 
@@ -12,20 +11,21 @@ format pour travailler avec JavaScript - un langage de programmation populaire p
 
 Après avoir envisagé de créer sa propre solution de gestion d'API, l'équipe technologique de Bank A a plutôt décidé de mettre en œuvre une solution IBM API Management, qui lui permettra d'entrer rapidement sur le marché à un coût réduit.
 
-Dans cet exercice, nous allons modifier l'API **bank** afin d'y ajouter une opération qui solicite un service Web existant. 
+Dans cet exercice, nous allons modifier l'API **bank 1.0.0** afin d'y ajouter une opération qui solicite un service Web existant. 
 
 
 ## Ajout d'un service Web
+---
 
-> Dans un premier temps, l'objet de cette opération est de retourner le solde d'un compte client. Le compte client (accountId) est placé dans le chemin de la requête.
+> L'objet de l'opération fournie pas le service web est de retourner le solde d'un compte client. Le compte client (accountId) est placé dans le chemin de la requête.
 
 <img src="img/flow.jpg">
 
-- Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
+- Cliquer sur ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
 
 Une fois dans l'onglet **Concevoir** *(Design)*
 
-- Ajouter un **Chemin** *(Path)* nommé **getBalance**
+- Ajouter un **Chemin** *(Path)* nommé **/getBalance/{accountId}**
 
 
 Libéllé       | Valeur
@@ -34,11 +34,13 @@ Chemin        | /getbalance/{accountId}
 
 ![alt](img/getbalance.gif)
 
-- Ajouter le  **Paramêtre** *(Parameter)* nommé **accountId**
+- Ajouter le **Paramêtre** *(Parameter)* nommé **accountId**
 
 > Rappelez vous que dans la description de l'API le paramêtre "accountId" doit contenir l'identifiant du compte transmit au service Web.
 
-Cliquer ->  **Concevoir** *(Design)* > **Chemins** *(Path)* > **getBalance** > **Ajouter un Paramêtre** 
+Cliquer ->  **Concevoir** *(Design)* > **Chemins** *(Path)* > **/getBalance/{accountId}** > **Ajouter un Paramêtre** 
+
+- Compléter avec les valeurs suivantes :
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -49,10 +51,11 @@ Type          | interger-32
 
 ![alt](img/getbalanceaddparam.gif)
 
-> Nouveau allons ensuite définir le schéma de sortir relatif à cette API en créant une nouvelle définition.
+> Nouveau allons ensuite définir le schéma de sortie relatif à cette API en créant une nouvelle définition.
 
 - Cliquer ->  **Concevoir** *(Design)* > **Definitions** *(Definition)* > **+** 
 
+- Compléter avec les valeurs suivantes :
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -70,7 +73,7 @@ Exemple       | {“accountValue”: “76628730”}
 - Cliquer ->  **Concevoir** *(Design)* > **Services** *(Services)* > **+** 
 
 - Choisir **Charger a partir d'une URL**
-- Import wsdl : **http://banka.mybluemix.net/services/AccountService?wsdl**
+- Indiquer l'url suivante : **http://banka.mybluemix.net/services/AccountService?wsdl**
 - Selectionner l'operation **AccountService** 
 - Puis **Terminé**
 - **Sauvegarder**
@@ -85,7 +88,7 @@ Cette vue contient une palette qui répertorie les diférentes politiques dispon
 
 Cliquer ->  **Assembler** *(Assemble)*
 
-Nous avons déjà un assemblage existant définissant le flux associé au chemin getQuote.
+Nous avons déjà un assemblage existant définissant le flux associé au chemin **getQuote** (Lab 01).
 
 Pour définir le flux associé au chemin **getBalance**, nous allons utiliser une des politiques de routage d'API Connect.
 
@@ -104,36 +107,44 @@ Cas 1 		    | /getBalance/{accountId}
 
 ![alt](img/moveinvoke.gif)
 
-- Selectionner dans la palette la politique **getBalance**
-- Puis faite un Déplacer/Poser de la politique **getBalance** dans le flux relatif à la condition **/getBalance**
+- Selectionner dans la palette la politique **getBalance** (Tout en bas de la liste)
+- Puis faite un Déplacer/Poser de la politique **getBalance** dans le flux relatif à la condition **GET /getBalance/{accountId}**
 
 ![alt](img/addgetbalance.gif)
 
 > Nous allons maintenant editer les propriétés d'entrée et de sortie du flux **/getBalance**
 
+- Cliquer sur la politique **getBalance: input**
 - Cliquer sur l'icone en forme de crayon pour éditer les paramêtre d'entrée **getBalance: input**
 
 <img src="img/getBalanceInputEdit.png">
 
+- Puis compléter avec le valeur suivantes :
+
 ```
 request.paramter.accountId				accountId 
-none 							          integer
+none 							                integer
 ```
 <img src="img/getBalanceInput.png">
 
-> Nous allons ensuite associé les 
-- map **getBalance: input**
+> Nous allons ensuite associé les valeurs de la requête avec les champs d'entrée requis par le service web.
+
+- cliquer sur le 'rond' en face d'**accountId** puis sur le 'rond' **arg0** (Coté Output)
 
 ```	
 map property : accountId  with ----> arg0
 ```
 <img src="img/getBalanceInputmapping.png">
 
+> Nous allons maintenant associé les valeurs de sortie du service web avec les champs de sortie de la requête.
 
-- Edit **getBalance: output**
+
+- Cliquer sur la politique **getBalance: ouput**
+- Cliquer sur l'icone en forme de crayon pour éditer les paramêtre de sortie **Ouput**
 
 <img src="img/getBalanceOutputEdit.png">
 
+- Puis compléter avec le valeur suivantes :
 
 ```
 message.body					ouput
@@ -141,7 +152,9 @@ message.body					ouput
 application/json    			def/jsonResponse
 ```
 
-- map **getBalance: output**
+<img src="img/getBalanceOutput.png">
+
+- cliquer sur le 'rond' en face du champs **return** (Coté Input) puis sur le 'rond' **accountValue** (Coté Output)
 
 ```	
 map property : return  with ----> accountValue
@@ -152,30 +165,30 @@ map property : return  with ----> accountValue
 
 ![alt](img/save.png)
 
-La conception en l'API est maintenant terminé.
+L'intégration du service Web est maintenant terminé.
 
-#### Tester votre nouvel API : **bank**
+## Tester votre nouvel API : **bank 1.0.0**
+---
 
+- Cliquer sur l'icon **Test** pour ouvrir le panneau des outils de test.
 
-- Cliquer sur l'icon **Test** 
-
-![alt](img/play2.png) 
-
-pour ouvrir le panneau des outils de test.
+<img src="img/play2.png" alt="actions" style="width: 350px;"/> 
 
 - Selectionner le catalogue **Sandbox** (Selectionné par défaut)
-- Selectionner le produit **bankproduct 1.0.0** (Précédèment créé)
+- Selectionner le produit **bankproduct 1.0.0** 
 - Cliquer sur **Ajouter l'API** *(Add API)*
 - Puis **Suivant** *(Next)*
 
 ![alt](img/opentest.gif) 
 
 - Cliquer sur **Republier le produit** 
-- Selectionner l'opération **get getBalance** (Précédèment créé)
+- Selectionner l'opération **get /getBalance** 
 - Mettre une valeur numérique pour le paramêtre *accountId*
 - Puis cliquer sur le bouton **Appeler**
 
-Le résultat devrait avoir le forme suivante
+Le résultat devrait avoir le forme suivante :
+
+>Le resultat doit être égale à la valeur du paramêtre *accountId* +1
 
 ```
 Code de statut:
@@ -197,19 +210,18 @@ Corps du message:
 ```
 ![alt](img/testgetbalance.gif) 
 
-***
- 
 
 
-## Synthése
-> 
-> Durant cet exercice, nous avons montrer les points suivants :
-> 
-> - Utilisation de facultés de routage d'API Connect 
-> - Comment intégrer un web service (SOAP) existant
-> - Utiliser les composants de mapping de la solution API Connect
-> - Tester une API
->
+## Résumé
+---
+
+Durant cet exercice, nous avons montrer les points suivants :
+
+- Utilisation de facultés de routage d'API Connect 
+- Comment intégrer un web service (SOAP) existant
+- Utiliser les composants de mapping de la solution API Connect
+- Tester une API
+
 
 ---
 

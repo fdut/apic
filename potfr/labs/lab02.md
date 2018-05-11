@@ -1,26 +1,22 @@
 # Proof of Technology API Connect
 
-# Lab2 : Publication et Portail Developpeur
+## Lab 02 : Publication et Portail Developpeur
 
+## Objectif
 
-## Fournisseur d'API : Publication 
-
-
-> Nous avons créé une ou plusieurs API. L'objectif est maintenant de publier ces APIs pour être ensuite utiliser par des applications tierces.
+> Nous avons créé une ou plusieurs APIs. L'objectif est maintenant de publier ces APIs pour être ensuite utilisées par des applications tierces.
 
 > Les composants API Gateway, API Manager et API Portal interviennent ici.
 
-> Pour Rappel :
 > 
-> - L'API Gateway expose les API aux consommateurs d'API 
-> - L'API Manager déploi les produits d'API sur l'API Gateway et l'API Portal
-> - L'API Portal permet au développeurs d'application de souscrire au Produit d'API.
+> - L'API Gateway expose les APIs aux consommateurs d'API 
+> - L'API Manager déploit les produits d'APIs sur l'API Gateway et l'API Portal
+> - L'API Portal permet aux développeurs d'application de souscrire aux Produits d'API.
  
+## Publication (Fournisseur d'API)
+---
 
-< METTRE IMAGE ICI >
-
-
-Pour cet exercice nous allons travailler directement dans l'environnement "Bac à Sable" (Sandbox) de l'API Manager sur IBM Cloud.
+>Pour cet exercice nous allons travailler directement dans l'environnement "Bac à Sable" (Sandbox) de l'API Manager sur IBM Cloud.
 
 
 - Ouvrir le l'onglet "Brouillon" dans API Manager
@@ -28,38 +24,45 @@ Pour cet exercice nous allons travailler directement dans l'environnement "Bac �
 ![alt](img/draftfr.gif)
 
 ### Configurer votre produit d'API
+---
 
 -- A COMPLETER --
 
 ### Publier un produit d'API dans le catalogue SandBox 
+---
 
-> Pour rappel : Un **catalogue** dans API Connect représente un ensemble de groupe de passerelles (Gateway) et d'un portail developpeur. Cela ressemble à un environnement mais il contient aussi une dimension business. Par exemple, les bons noms pour un catalogue sont Sandbox, Dev, Integration, Production, CRM (pour mes API CRM exposées à une population spécifique), etc ...
+> Un **catalogue** dans API Connect représente un ensemble de groupe de passerelles (Gateway) et d'un portail developpeur.
+Cela ressemble à un environnement mais il contient aussi une dimension métier. Par exemple, les bons noms pour un catalogue sont Sandbox, Dev, Integration, Production, CRM (pour mes API CRM exposées à une population spécifique), etc ...
 
-- Cliquer ->  **Brouillon** *(Draft)* > **Produits** *(Product)* >  **bankproduct**
-- Cliquer ensuite sur l'icone **Publication** (le nuage en haut à droite)
-- A ce stade l'API est publiée sur l'API Manager en état **pré-prodution**. Il n'est pas encore disponible sur le Portail Developpeur.
-- Cliquer sur l'icone **>>** > **Tableau de bord** *(Dashboard)* > **Sandbox**
+- Cliquer sur ->  **Brouillon** *(Draft)* > **Produits** *(Product)* >  **bankproduct 1.0.0**
+- Cliquer ensuite sur l'icone **Publication** (le nuage en haut à droite) et selectionner le catalogue **Sandbox**
+- A ce stade le produit d'API est publiée sur l'API Manager en état **pré-prodution**. Il n'est pas encore disponible sur le Portail Developpeur.
+- Cliquer sur l'icone **>>** -> **Tableau de bord** *(Dashboard)* > **Sandbox**
 - Changer l'état **Mise en pré-production** en **Publier** en cliquant sur l'icone avec les 3 points verticaux et en sélectionnant **Publier**
 
 ![alt](img/publish.gif)
 
-Le produit d'API (qui inclut l'API **bank** et les rêgles d'utilisation des APIs contenues dans ce produit) est maintenant publié sur le Portail Developpeur et disponible pour les consommateur d'API.
+Le produit d'API (qui inclut l'API **bank 1.0.0** et les rêgles d'utilisation des APIs contenues dans ce produit) est maintenant publié sur le Portail Developpeur et disponible pour les consommateurs d'API.
 
+## le Portail Developpeur (Consommateur d'API)
+---
 
-## Consommateur d'API : le Portail Developpeur
+En tant que développeur d'application, je souhaite utiliser l'API **bank 1.0.0** depuis mon application.
 
-En tant que développeur d'application je souhaite utiliser l'API **bank** depuis mon application.
+Pour cela ...
 
-- Se connecter au Portail Developpeur. Pour connaitre l'url du Portail Developpeur : Cliquer sur l'icone **>>** > **Tableau de bord** *(Dashboard)* > **Sandbox** > **Paramêtres** *(Settings)*> **Portail** 
+- Je dois me connecter au Portail Developpeur. 
+
+>Pour connaitre l'url du Portail Developpeur : Cliquer sur l'icone **>>** > **Tableau de bord** *(Dashboard)* > **Sandbox** > **Paramêtres** *(Settings)*> **Portail** 
 
 ![alt](img/urlportal.png)
 
 - Dans le Portail Developpeur, cliquez sur le menu **Produit d'API**
-- Le produit **bankproduct** doit être visible
+- Le produit **bankproduct (1.0.0)** doit être visible
 
 ![alt](img/produitdapi.png)
 
-Pour souscrire à un API nous devons créer un compte développeur (Consommateur d'API)
+Pour souscrire à une API nous devons créer un compte développeur (Consommateur d'API)
 
 - Pour cela cliquer sur **Create an account** (en haut à droite) et remplisser le formulaire.
 
@@ -79,10 +82,14 @@ https://sb-fdutorg-sydneydev.developer.au.apiconnect.ibmcloud.com/?q=ibm_apim/ac
 
 ```
 
-- Une fois le compte activer, connectez-vous avec le compte développeur.
-- Avant de souscrire à une ou plusieurs API, il faut déclarer une application consommatrice des APIs.
+- Une fois le compte activé, connectez-vous avec le compte développeur.
+- Avant de souscrire à une ou plusieurs API, il faut déclarer une application consommatrice des APIs. 
 
-- Cliquer sur **Créé une application** dans le menu et renseigner les valeurs suivantes :
+> Lors de la création de l'Application, 2 clés sont générées : client id et client secret. Ces 2 clés sont trés importante, elle seront requises pour l'appel aux APIs auquelles on a souscrit.
+
+>Cela permettra d'identifier l'application consommatrice d'une API et pourquoi pas en interdire l'accès.
+
+- Cliquer sur **Créer une application** dans le menu et renseigner les valeurs suivantes :
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -94,7 +101,7 @@ Description   | une application mobile
 ![alt](img/app.gif)
 
 ||| **IMPORTANT** 
-> Copier/Coller les valeurs Client Id et Client Secret dans un editeur de texte. Ces valeurs seront nécéssaires pour consommer les APIs.
+> Copier/Coller les valeurs Client Id et Client Secret dans un editeur de texte. Ces valeurs seront nécéssaires pour consommer les APIs dans la suite des exercices.
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -102,30 +109,32 @@ client id     | *************
 client secret | *************
 
 
-Il est maintenant possible souscrire aux API
+Il est maintenant possible de souscrire aux APIs
 
 - Cliquer sur **Produit d'API**
 - Puis **bankproduct 1.0.0**
 - Puis **S'abonner**
-
+- Choisir l'application **mobileapp** et cliquer sur le bouton **S'abonner**
 
 ![alt](img/subscribe.gif)
-
 
 Nous pouvons alors tester les APIs dans le Portail Developpeur.
 
 - Cliquer dans le panneau a droite sur l'API **bank**
-- Puis sur l'action **GET /getQuote
-- Sur le panneau de gauche, des exemples d'appel de l'API avec différents type de langage sont disponible.
+- Puis sur l'action **GET /getQuote**
+- Sur le panneau de gauche, des exemples d'appel de l'API avec différents type de langage sont disponibles.
 - Aller dans la section **Exemple de demande**
-- ID Client a été renseigné par defaut.
-- Rensigner le paramêtre symbol avec la valeur **IBM** et cliquer sur le bouton **Appeler une Opération**
+- Le **Client ID** a été renseigné par defaut.
+- Renseigner le paramêtre **symbol** avec la valeur **IBM** et cliquer sur le bouton **Appeler une Opération**
+
+Le resultat devrait être similaire à celui de l'exercice précédent (Lab 01)
 
 ![alt](img/testapi.gif)
 
-## Synthése
-Durant cette exercice nous avons vue comment publier un produit d'API, souscrire à un produit d'API dans le Portail Developpeur et enfin tester une API dans ce même portail.
-
+## Résumé
 ---
 
+Durant cet exercice nous avons vue comment publier un produit d'API, souscrire à un produit d'API dans le Portail Developpeur et enfin tester une API dans ce même portail.
+
+---
 2018 - frederic_dutheil@fr.ibm.com
