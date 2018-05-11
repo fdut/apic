@@ -8,16 +8,16 @@
 
 > Les composants API Gateway, API Manager et API Portal interviennent ici.
 
-> 
+
 > - L'API Gateway expose les APIs aux consommateurs d'API 
 > - L'API Manager déploit les produits d'APIs sur l'API Gateway et l'API Portal
 > - L'API Portal permet aux développeurs d'application de souscrire aux Produits d'API.
  
+
 ## Publication (Fournisseur d'API)
 ---
 
 >Pour cet exercice nous allons travailler directement dans l'environnement "Bac à Sable" (Sandbox) de l'API Manager sur IBM Cloud.
-
 
 - Ouvrir le l'onglet "Brouillon" dans API Manager
 
@@ -26,7 +26,28 @@
 ### Configurer votre produit d'API
 ---
 
--- A COMPLETER --
+Dans le contexte de API Connect un **Produit** contient les informations suivantes :
+
+* Informations contractuelles	d'usage des APIs
+* La visibilité vis à vis des développeurs d'application
+* Les API disponibles via ce produits d'API
+* Les Plans associés. Incluant les notions de quotas et de monétisations des APIs disponibles via ce Produits d'APIs
+* Catégories relatives aux APIs de ce Produit.
+
+![alt](img/plan2.png)
+
+Ouvrir le produit d'API **bankproduct 1.0.0**
+
+- Cliquer sur ->  **Brouillon** *(Draft)* > **Produits** *(Product)* >  **bankproduct 1.0.0**
+
+Une fois le produit ouvert, vous pouvez parcourir l'ensemble des sections du produit et plus particuliérement les sections Visibilité, API, Plans.
+
+> A noter : Un plan est créé par defaut avec une **Limites de débit (appels/intervalle de temps)** de 100 appels par Heure (avec dépassement autorisé). Vous pouvez ici créer & modifier un ou plusieurs nouveaux Plan.
+
+Comme décrit dans le schéma ci-dessous le développeur d'API (Provider) développe et publie des APIs. Le développeur d'application (Consumer) souscrit à un Plan d'API pour consommer les APIs d'un produit d'API
+
+![alt](img/subscription.png)
+
 
 ### Publier un produit d'API dans le catalogue SandBox 
 ---
