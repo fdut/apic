@@ -1,6 +1,6 @@
 # Proof of Technology API Connect
 
-## Lab 03 : Routing et Service SOAP 
+## Lab 3 : Routing et Service SOAP 
 
 ## Cas d'usage 
 
@@ -223,6 +223,11 @@ Durant cet exercice, nous avons montrer les points suivants :
 - Tester une API
 
 
----
+## Continuer
 
-2018 - frederic_dutheil@fr.ibm.com
+Aller à - [Lab 4 - Securiser une API avec OAuth 2.0](/potfr/labs/lab04.md)
+
+
+
+---
+##### 2018 - frederic_dutheil@fr.ibm.com

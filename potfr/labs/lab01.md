@@ -1,7 +1,7 @@
 # Proof of Technology API Connect
 
 
-## Lab 01 : Exposition d'une API Rest via API Connect
+## Lab 1 : Exposition d'une API Rest via API Connect
 
 ## Objectif 
 
@@ -290,6 +290,9 @@ Nous avons aussi vu comment utiliser des politiques dans l'outil d'assemblage.
 
 Dans l'exercice suivant, Nous allons maintenant voir comment publier cette API (via son Produit d'API) et comment la consommer via une application Web.
  
+## Continuer
+
+Aller à - [Lab 2 - Publication et Portail Developpeur](/potfr/labs/lab02.md)
 
 ---
-2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - frederic_dutheil@fr.ibm.com

@@ -1,6 +1,6 @@
 # Proof of Technology API Connect
 
-## Lab4 : Securiser une API avec OAuth2 
+## Lab 4 : Securiser une API avec OAuth2 
 
 ## Objectif 
 

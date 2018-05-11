@@ -1,6 +1,6 @@
 # Proof of Technology API Connect
 
-## Lab 02 : Publication et Portail Developpeur
+## Lab 2 : Publication et Portail Developpeur
 
 ## Objectif
 
@@ -136,5 +136,11 @@ Le resultat devrait être similaire à celui de l'exercice précédent (Lab 01)
 
 Durant cet exercice nous avons vue comment publier un produit d'API, souscrire à un produit d'API dans le Portail Developpeur et enfin tester une API dans ce même portail.
 
+## Continuer
+
+Aller à - [Lab 3 - Routing et Service SOAP](/potfr/labs/lab03.md)
+
+
+
 ---
-2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - frederic_dutheil@fr.ibm.com

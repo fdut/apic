@@ -69,6 +69,9 @@ Maintenant que votre service API Connect est opérationnel, vous allez configure
 
     Vous recevrez un e-mail lorsque votre site portail sera opérationnel.
 
-## Continue
+## Continuer
 
-Aller à - [Lab 1 - Exposition d'une API Rest via API Connect](/lab01)
+Aller à - [Lab 1 - Exposition d'une API Rest via API Connect](/potfr/labs/lab01.md)
+
+---
+##### 2018 - frederic_dutheil@fr.ibm.com
