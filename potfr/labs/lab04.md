@@ -171,6 +171,11 @@ Durant cet exercice, nous avons montrer les points suivants :
 - Creation d'une API OAuth 2.0
 - Securisation d'une API via OAuth 2.0
 
+
+## Continuer
+
+Aller à - [Lab 5 - Analytique](/potfr/labs/lab05.md)
+
 ---
 
 2018 - frederic_dutheil@fr.ibm.com
