@@ -13,3 +13,5 @@ API Connect est une solutions d'API Management leader sur le marché. Découvrer
 + [Lab 2 - Publication et Portail Developpeur](./potfr/labs/lab02.md)
 + [Lab 3 - Routing et Service SOAP](./potfr/labs/lab03.md)
 + [Lab 4 - Securiser une API avec OAuth2](./potfr/labs/lab04.md)
++ [Lab 5 - Analytique](./potfr/labs/lab05.md)
+
