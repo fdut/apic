@@ -44,6 +44,10 @@ L'analytique côté API Manager fournie les informations d'analyse pour le Fourn
 
 - Revenez à la vue analytique et notez comment les données sont actualisées automatiquement.
 
+- Il est aussi possible de créer ses propres tableaux de bord.
+
+    ![](./img/AnalyticPersonalisationTableaudebord.gif)
+
 ## Analytique : Portail Developpeur
 
 L'analytique côté Portail Developpeur fournie les informations d'analyses pour le Fournisseur d'API.
