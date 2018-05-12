@@ -44,6 +44,8 @@ L'analytique côté API Manager fournie les informations d'analyse pour le Fourn
 
 - Revenez à la vue analytique et notez comment les données sont actualisées automatiquement.
 
+    ![](img/analytiqueprovider.gif)
+
 - Il est aussi possible de créer ses propres tableaux de bord.
 
     ![](./img/AnalyticPersonalisationTableaudebord.gif)
@@ -54,15 +56,15 @@ L'analytique côté Portail Developpeur fournie les informations d'analyses pour
 
 - Se connecter au Portail Developpeur. 
 
->Pour connaitre l'url du Portail Developpeur : Cliquer sur l'icone **>>** > **Tableau de bord** *(Dashboard)* > **Sandbox** > **Paramêtres** *(Settings)*> **Portail** 
+- Pour connaitre l'url du Portail Developpeur : Cliquer sur l'icone **>>** > **Tableau de bord** *(Dashboard)* > **Sandbox** > **Paramêtres** *(Settings)*> **Portail** 
 
-![alt](img/urlportal.png)
+    ![](img/urlportal.png)
 
 - Cliquer sur Application puis sur l'application **mobileapp** (ou un autre application de votre choix) puis cliquer sur l'icone **Analyse**
 
 - Le consomateur a ici en temps réel sa consommation des APIs avec le taux de succès, usage de données, la latence.
 
-![alt](img/analytiqueconsumer.gif)
+    ![](img/analytiqueconsumer.gif)
 
 Il est bien sur possible de changer la période de temps pour avoir des informations horaires, journalière, mensuelles, annuelles.
 
@@ -75,4 +77,4 @@ Durant cet exercice, nous avons montrer les points suivants :
 
 ---
 
-2018 - frederic_dutheil@fr.ibm.com
+2018 - IBM - frederic_dutheil@fr.ibm.com
