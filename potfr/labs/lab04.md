@@ -1,6 +1,6 @@
 # Proof of Technology API Connect
 
-## Lab 4 : Securiser une API avec OAuth2 
+## Lab 4 : Securiser une API avec OAuth 2.0 
 
 ## Objectif 
 
@@ -12,29 +12,18 @@ Nous allons donc voir les points suivants:
 + Comment cloner une API pour en générer une nouvelle version.
 + Sécuriser une API via un fournisseur OAuth 2.0 
 
-> Nous allons commencer par créer une nouvelle version de l'API **bank**
+> Nous allons commencer par créer une API OAuth 2.0 
 >
 
-## Créer une nouvelle version de l'API **bank 1.0.0**
----
-
-- Cliquer sur ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
-- Dans le coin a droite de l'écran, cliquer sur l'icone
-<img src="img/plusdaction.png" alt="actions" style="width: 25px;"/> 
-- Selectionner l'option : **Sauvegarder sous une nouvelle version**
-
-![](img/newversion.png)
-
-- Entrer un nouveau numéro de version comme **2.0.0** et cliquer sur  **Sauvegarder sous une nouvelle version**
-
-> Nous avons maintenant 2 versions disponibles pour une même API.
-> La version **bank 1.0.0** sera l'API non sécurisé et la version **bank 2.0.0** sera l'API sécurisé via OAuth 2.0
-> 
 
 ## Créer un fournisseur OAuth 2.0
 ---
 
+API Connect permet de dissocier la politique de sécurité du contexte fonctionnel. Aussi une equipe de développeur peut développer les APIs de sécurité et une autres les APIs fonctionnelle.
+
 Cliquer sur -> **Brouillon** *(Draft)* > **API** *(API)* > **Ajouter** *(Add)* > **API du fournisseur OAuth 2.0** 
+
+Compléter avec les valeurs suivantes et cliquer sur **Creer**
 
 Libéllé       | Valeur
 ------------- | -------------
@@ -43,6 +32,7 @@ Nom			    | oauth
 Chemin de base       | /
 Version       | 1.0.0
 
+||| IMPORTANT : Vérifier que la valeur du chemin de base est bien /
 
 ![alt](img/createoauthapi.gif)
 
@@ -92,12 +82,28 @@ URL d'authentification | **https://thinkibm-services.mybluemix.net/auth**
 
 La conception en l'API OAuth 2 est maintenant terminé.
 
+## Créer une nouvelle version de l'API **bank 1.0.0**
+---
 
-### Appliquer la politique de sécurité OAuth 2.0 pour l'API **bank 2.0.0**
+- Cliquer sur ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 1.0.0**
+- Dans le coin a droite de l'écran, cliquer sur l'icone
+<img src="img/plusdaction.png" alt="actions" style="width: 25px;"/>
+
+- Selectionner l'option : **Sauvegarder sous une nouvelle version**
+
+![](img/newversion.png)
+
+- Entrer un nouveau numéro de version comme **2.0.0** et cliquer sur **Sauvegarder sous une nouvelle version**
+
+> Nous avons maintenant 2 versions disponibles pour une même API.
+> La version **bank 1.0.0** sera l'API non sécurisé par OAuth 2.0 et la version **bank 2.0.0** sera l'API sécurisé via OAuth 2.0
+> 
+
+## Appliquer la politique de sécurité OAuth 2.0 pour l'API **bank 2.0.0**
 
 - Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* >  **bank 2.0.0**
 
-- Dans la section **Définition de sécurité**, cliquer sur le **+** afin d'ajouter une nouvelle définition.
+- Dans la section **Définition de sécurité**, cliquer sur le **+** afin d'ajouter une nouvelle définition **OAuth**
 
 Libéllé | Valeur
 --------|-------
@@ -106,15 +112,15 @@ Description | **Resource Owner Password Grant Type**
 Flux | **Mot de passe**
 URL de jeton | **{Catalog Gateway Endpoint}/oauth2/token**
 
-L'URL du jeton sera basée sur l'emplacement de votre organisation et de votre espace sur Bluemix public.
+L'URL du jeton sera basée sur l'emplacement de votre organisation et de votre espace sur IBM Cloud  public.
 
-Vous pouvez trouver votre URL Gateway Endpoint en vous connectant à Bluemix et en lançant le service API Connect, puis en naviguant dans votre catalogue (le catalogue par défaut créé est Sandbox).
+Vous pouvez trouver votre URL Gateway Endpoint via le menu `>>` puis **Tableau de bord** -> **Sandbox** -> **Paramêtres** -> **Passerelle** 
 
-De là, allez dans Paramètres, puis choisissez l'option Passerelles dans la palette du menu latéral. Localisez ENDPOINT, copiez simplement et collez le contenu dans le champ URL de jeton de vos paramètres API OAuth, puis ajoutez / oauth2 / jeton.
+![alt](img/urlendpoint.png)
 
-Vous aurez besoin de l'URL Gateway Endpoint plus tard. Enregistrez la valeur de l'URL Gateway Endpoing dans un éditeur de texte pour en faciliter l'accès.
+ Localisez ENDPOINT, copiez simplement et collez le contenu dans le champ URL de jeton de vos paramètres API OAuth, puis ajoutez /oauth2/token jeton.
 
-- Modifier la Portée avec les valeurs suivantes :
+- Ajouter une Portée avec les valeurs suivantes :
 
 Libéllé | Valeur
 --------|-------
@@ -133,9 +139,20 @@ Description | **Acces aux ressources de Bank A**
 
 L'API **bank 2.0.0** est maintenant sécurité avec OAuth 2.0
 
-### Mise à jour du produit d'API **bankproduct 1.0.0**
+## Créer une nouvelle version du produit d'API **bankproduct 2.0.0**
+---
 
 - Cliquer ->  **Brouillon** *(Draft)* > **Produit** *(Product)* >  **bankproduct 1.0.0**
+
+- Dans le coin a droite de l'écran, cliquer sur l'icone
+<img src="img/plusdaction.png" alt="actions" style="width: 25px;"/>
+
+- Selectionner l'option : **Sauvegarder sous une nouvelle version**
+
+- Entrer un nouveau numéro de version comme **2.0.0** et cliquer sur **Sauvegarder sous une nouvelle version**
+
+
+### Mise à jour du produit d'API **bankproduct 2.0.0**
 
 - Dans la section **API** 
 - Supprimer **bank 1.0.0** 
@@ -144,20 +161,51 @@ L'API **bank 2.0.0** est maintenant sécurité avec OAuth 2.0
 ![alt](img/updateproduct.png)
 
 - **Sauvegarder** en cliquant sur l'icone en haut a droite 
-- **Publier**
+- Puis **Publier**
+
+Nous avons maintenant 2 produits d'API déployés, la version bankproduct 1.0.0 `publier` et bankproduct 2.0.0 en `mise en pré-production`
+
+Menu `>>` puis **Tableau de bord** -> **Sandbox**
+
+![alt](img/2product.png)
+
+Nous allons remplacer la version 1.0.0 par la version 2.0.0
+
+Pour le produit **bankproduct 2.0.0** 
+
+- cliquer sur l'icone 
+<img src="img/plusdaction.png" alt="actions" style="width: 25px;"/>
+
+- Puis selectionner **Remplacer un produit existant**
+- Selectionner **bankproduct 1.0.0** puis **Suivant**
+- Selectionner les plans à **Remplacer**
+- Cliquer sur le bouton **Remplacer
+
+A la fin de l'opération le produit **bankproduct 2.0.0** est `Publier` et le produit **bankproduct 1.0.0** est `Retiré`
+
+![alt](img/remplaceproduct.gif)
+
+
 
 
 Nous pouvons alors tester les APIs dans le Portail Developpeur.
 
+- Cliquer sur **Produit d'API**
+- Puis **bankproduct 2.0.0**
+
+Il n'est pas nécéssaire de souscrire de nouveau car les souscription ont été migré automatiquement.
+
 - Cliquer dans le panneau a droite sur l'API **bank**
-- Puis sur l'action **GET /getQuote
+- Puis sur l'action **GET /getQuote**
 - Sur le panneau de gauche, des exemples d'appel de l'API avec différents type de langage sont disponible.
 - Aller dans la section **Exemple de demande**
-- ID Client a été renseigné par defaut.
-- Il est nécéssaire de renseigner le Client Secret pour obtenir un jeton valide
+- l' **id Client** a été renseigné par defaut.
+- Il est nécéssaire de renseigner le **Client Secret** *(Valeur confidentielle du client)* pour obtenir un jeton valide
 - Renseigner les champs **Utilisateur** et **Mot de passe** (user/user)
 - Cliquer sur le bouton **Autoriser**
-En cas de succès un jeton est retourné et sera utiliser pour appeler l'action GET /getQuote
+
+>En cas de succès un jeton est retourné et sera utiliser pour appeler l'action GET /getQuote
+
 - Renseigner le paramêtre symbol avec la valeur **IBM** et cliquer sur le bouton **Appeler une Opération**
 
 ![alt](img/testoauthapi.gif)
@@ -167,7 +215,7 @@ En cas de succès un jeton est retourné et sera utiliser pour appeler l'action 
 
 Durant cet exercice, nous avons montrer les points suivants :
  
-- Création d'une nouvelle version d'une API existante 
+- Création d'une nouvelle version d'une API et d'un produit existants
 - Creation d'une API OAuth 2.0
 - Securisation d'une API via OAuth 2.0
 

@@ -53,7 +53,7 @@ Type          | interger-32
 
 > Nouveau allons ensuite définir le schéma de sortie relatif à cette API en créant une nouvelle définition.
 
-- Cliquer ->  **Concevoir** *(Design)* > **Definitions** *(Definition)* > **+** 
+- Cliquer ->  **Concevoir** *(Design)* > **Definitions** *(Definition)* > `+` 
 
 - Compléter avec les valeurs suivantes :
 
@@ -119,7 +119,8 @@ Cas 1 		    | /getBalance/{accountId}
 
 <img src="img/getBalanceInputEdit.png">
 
-- Puis compléter avec le valeur suivantes :
+- Cliquer sur le bouton `paramètre pour l'opération` puis selectionner `get /getBalance/{accountId}` puis le bouton **Terminé**
+- Nous avons les valeurs suivantes :
 
 ```
 request.paramter.accountId				accountId 
@@ -144,6 +145,8 @@ map property : accountId  with ----> arg0
 
 <img src="img/getBalanceOutputEdit.png">
 
+- Cliquer sur le bouton `sortie pour l'opération` puis selectionner `get /getBalance/{accountId}` 
+
 - Puis compléter avec le valeur suivantes :
 
 ```
@@ -151,6 +154,7 @@ message.body					ouput
 
 application/json    			def/jsonResponse
 ```
+- cliquer sur **Terminé**
 
 <img src="img/getBalanceOutput.png">
 
@@ -183,7 +187,7 @@ L'intégration du service Web est maintenant terminé.
 
 - Cliquer sur **Republier le produit** 
 - Selectionner l'opération **get /getBalance** 
-- Mettre une valeur numérique pour le paramêtre *accountId*
+- Mettre une valeur numérique pour le paramêtre **accountId**
 - Puis cliquer sur le bouton **Appeler**
 
 Le résultat devrait avoir le forme suivante :

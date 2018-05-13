@@ -5,13 +5,13 @@
 
 ## Objectif 
 
-> Imaginons que notre banque *(Bank A)* propose déjà des APIs REST en interne et qu'elle souhaite les exposés via une solution d'API Management.
+> Imaginons que notre banque *(Bank A)* propose déjà des APIs REST en interne et qu'elle souhaite les exposer via une solution d'API Management.
 
 >L'objet de cet exercice est de montrer comment exposer une API existante avec API Connect
 
 > Afin d'illustrer cet exemple nous allons intégrer une API tiers nommé **Quote** et disponible ici : http://dev.markitondemand.com/MODApis/Api/v2/doc
 
-> L'API **QUote** propose de retourner la valeur courante d'une action pour le nom d'un entreprise côté en bourse. 
+> L'API **Quote** propose de retourner la valeur courante d'une action pour le nom d'une entreprise côté en bourse. 
 
 ```
 Quote
@@ -49,6 +49,8 @@ Dans le contexte de API Connect un **Produit** contient les informations suivant
 
 Cliquer sur ->  **Brouillon** *(Draft)* > **Produits** *(Product)* > **Ajouter** *(Add)* > **Nouveau produit** *(New Product)*
 
+Compléter avec les valeurs ci-dessous puis cliquer **Créer un Produit**
+
 Libéllé       | Valeur
 ------------- | -------------
 Titre         | bankproduct
@@ -63,6 +65,8 @@ Version       | 1.0.0
 
 Cliquer ->  **Brouillon** *(Draft)* > **API** *(API)* > **Ajouter** *(Add)* > **Nouvelle API** *(New API)*
 
+Compléter avec les valeurs ci-dessous puis cliquer **Créer une API**
+
 Libéllé       | Valeur
 ------------- | -------------
 Titre         | bank
@@ -75,14 +79,15 @@ Version       | 1.0.0
 
 Une fois dans l'onglet **Concevoir** *(Design)*
 
-- Ajouter un **Chemin** *(Path)* nommé **getQuote**
-
-![alt](img/getquote.gif)
-
+- Ajouter un **Chemin** *(Path)* nommé **/getQuote**
+- Cliquer sur l'icone **+** et compléter avec les valeurs suivantes :
 
 Libéllé       | Valeur
 ------------- | -------------
 Chemin        | getQuote
+
+
+![alt](img/getquote.gif)
 
 
 - Ajouter le **Paramêtre** *(Parameter)* nommé **symbol**
@@ -90,7 +95,7 @@ Chemin        | getQuote
 > Rappelez vous que dans la description de l'API le paramêtre "symbol" doit contenir l'identifiant de la compagnie côté en bourse pour laquelle on recherche la valeur de l'action.
 > http://dev.markitondemand.com/MODApis/Api/v2/doc
 
-Cliquer ->  **Concevoir** *(Design)* > **Chemins** *(Path)* > **getQuote** > **Ajouter un Paramêtre** 
+Cliquer ->  **Concevoir** *(Design)* > **Chemins** *(Path)* > **/getQuote** > **Ajouter un nouveau paramêtre** 
 
 - Ajouter un Parametre
 
@@ -99,6 +104,7 @@ Libéllé       | Valeur
 Nom			      | symbol
 Situé dans    | requête *(query)*
 Requis        | Coché
+Type          | String
 
 ![alt](img/parametresymbol.gif)
 
@@ -147,7 +153,7 @@ La conception en l'API est maintenant terminé.
 
 - Cliquer sur **Republier le produit** 
 - Selectionner l'opération **get getQuote**
-- Mettre comme **IBM** (ou MSFT, AAPL) valeur pour le paramêtre *symbol*
+- Mettre comme valeur **IBM** (ou MSFT, AAPL) pour le paramêtre *symbol*
 - Puis cliquer sur le bouton **Appeler**
 
 Le résultat devrait avoir le forme suivante
@@ -188,7 +194,7 @@ https://api.au.apiconnect.ibmcloud.com/fdutorg-sydneydev/sb/bank/getQuote?symbol
 ## Ajouter une politique de transformation à l'API **bank**
 ---
 
-Comme nous l'avons vu le format du message retourné par l'API **Quote** de "Markit On Demand" est du XML or les applications Web ou Mobile préféres manipuler des messages au format JSON.
+Comme nous l'avons vu le format du message retourné par l'API **Quote** de "Markit On Demand" est du XML or les applications Web ou Mobile préférent manipuler des messages au format JSON.
 
 Il est trés simple avec API Connect de transformer le format XML vers JSON avec la politique de transformation "XML en JSON"
 
@@ -214,7 +220,7 @@ Ouvrir l'API **bank 1.0.0**
 
 - Cliquer sur **Republier le produit** 
 - Selectionner l'opération **get getQuote**
-- Mettre comme **IBM** valeur pour le paramêtre *symbol*
+- Mettre comme valeur **IBM** (ou MSFT, AAPL)  pour le paramêtre *symbol*
 - Puis cliquer sur le bouton **Appeler**
 
 
