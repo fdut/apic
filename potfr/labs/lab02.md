@@ -171,6 +171,29 @@ Le resultat devrait être similaire à celui de l'exercice précédent (Lab 01)
 
 ![alt](img/testapi.gif)
 
+## Tester votre API depuis une application Web.
+
+- Aller sur le site https://myapicsandbox.eu-de.mybluemix.net/settings
+
+- Entrer les informations requises pour la connection
+
+Libéllé       | Valeur
+------------- | -------------
+Client        | <votre client id>
+API Endpoint  | <api endpoint>
+
+![](img/apicsandboxsetting1.png)
+
+Vous pouvez trouver votre URL API Endpoint via le menu `>>` puis **Tableau de bord** -> **Sandbox** -> **Paramêtres** -> **Passerelle** 
+
+![alt](img/urlendpoint.png)
+
+- Sauvegarder en cliquant sur le boutton **save**
+- Aller à l'url https://myapicsandbox.eu-de.mybluemix.net/banka
+
+- Tester l'API **getQuote**
+
+
 ## Résumé
 ---
 
