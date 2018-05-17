@@ -301,4 +301,4 @@ Dans l'exercice suivant, Nous allons maintenant voir comment publier cette API (
 Aller à - [Lab 2 - Publication et Portail Developpeur](/potfr/labs/lab02.md)
 
 ---
-##### 2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil

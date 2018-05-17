@@ -206,4 +206,4 @@ Aller à - [Lab 3 - Routing et Service SOAP](/potfr/labs/lab03.md)
 
 
 ---
-##### 2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil

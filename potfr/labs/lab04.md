@@ -225,5 +225,4 @@ Durant cet exercice, nous avons montrer les points suivants :
 Aller à - [Lab 5 - Analytique](/potfr/labs/lab05.md)
 
 ---
-
-2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil

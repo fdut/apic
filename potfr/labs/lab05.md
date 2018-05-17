@@ -76,5 +76,4 @@ Durant cet exercice, nous avons montrer les points suivants :
 - Analytique pour Consommateur d'API via le Portail Developpeur
 
 ---
-
-2018 - IBM - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil

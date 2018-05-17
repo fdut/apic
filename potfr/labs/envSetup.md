@@ -42,7 +42,9 @@
 
     ![](./img/apic-service.png)
 
-1.  Vous pouvez lire quelques détails sur le service. Sélectionnez le plan de tarification ** Lite ** et cliquez sur le bouton «Créer».
+1.  Vous pouvez lire quelques détails sur le service. Sélectionnez le plan de tarification **Lite** et cliquez sur le bouton «Créer».
+
+	![](./img/planlite.png)
  
 1.  Une fois le service API Connect associé à votre compte, vous serez automatiquement lancé dans l'écran API Brouillons.
 
@@ -74,4 +76,4 @@ Maintenant que votre service API Connect est opérationnel, vous allez configure
 Aller à - [Lab 1 - Exposition d'une API Rest via API Connect](/potfr/labs/lab01.md)
 
 ---
-##### 2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil

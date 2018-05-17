@@ -234,4 +234,4 @@ Aller à - [Lab 4 - Securiser une API avec OAuth 2.0](/potfr/labs/lab04.md)
 
 
 ---
-##### 2018 - frederic_dutheil@fr.ibm.com
+##### 2018 - Frederic Dutheil
