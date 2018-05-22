@@ -1,4 +1,4 @@
-# apic
+# IBM API Connect
 API Connect Public repository
 
 
