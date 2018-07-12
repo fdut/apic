@@ -5,9 +5,9 @@
 
 ## Objectif 
 
-> Imaginons que notre banque *(Bank A)* propose déjà des APIs REST en interne et qu'elle souhaite les exposer via une solution d'API Management.
+Imaginons que notre banque *(Bank A)* propose déjà des APIs REST en interne et qu'elle souhaite les exposer via une solution d'API Management.
 
->L'objet de cet exercice est de montrer comment exposer une API existante avec API Connect
+L'objet de cet exercice est de montrer comment exposer une API existante avec API Connect
 
 > Afin d'illustrer cet exemple nous allons intégrer une API tiers nommé **Quote** et disponible ici : http://dev.markitondemand.com/MODApis/Api/v2/doc
 

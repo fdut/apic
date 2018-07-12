@@ -4,7 +4,7 @@
 
 ## Cas d'usage 
 
-La banque A dispose d'un ensemble de services SOAP existants qu'elle souhaite exposer via des API afin de favoriser la croissance du marché des appareils mobiles et des appareils. L'équipe commerciale de Bank A sait qu'une meilleure présence des applications mobiles et périphériques améliorera leur image de marque et augmentera la satisfaction des clients.
+La banque A dispose d'un ensemble de services SOAP existants qu'elle souhaite exposer via des API afin de favoriser sa croissance sur les marché des mobiles et des applications web. L'équipe commerciale de Bank A sait qu'une meilleure présence sur les applications mobiles et périphériques connectés améliorera leur image de marque et augmentera la satisfaction des clients.
 
 L'équipe commerciale de Bank A a reçu les exigences de ses développeurs d'applications mobiles pour exposer ses services Web existants en tant qu'API JSON REST. Les charges utiles JSON sont plus petites que les mêmes données au format SOAP, ce qui réduit la quantité de bande passante requise pour les applications mobiles. JSON est aussi une donnée plus facile
 format pour travailler avec JavaScript - un langage de programmation populaire pour le développement mobile.
@@ -123,7 +123,7 @@ Cas 1 		    | /getBalance/{accountId}
 - Nous avons les valeurs suivantes :
 
 ```
-request.paramter.accountId				accountId 
+request.parameter.accountId				accountId 
 none 							                integer
 ```
 <img src="img/getBalanceInput.png">
