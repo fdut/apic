@@ -36,17 +36,15 @@ When successful, the Quote method returns a serialized StockQuote object.
 
 In the context of API Connect a ** Product ** contains the following information:
 
-* Informations contractuelles	d'usage des APIs
-* La visibilité des API pour les développeurs d'application
-* Les API disponibles via ce produits d'API
-* Les Plans associés. Incluant les notions de quotas et de monétisations des APIs disponibles via ce Produits d'APIs
-* Catégories relatives aux APIs de ce Produit.
+* Contractual information of use of the APIs
+* Visibility of APIs for application developers
+* APIs available through this API products
+* Associated Plans. Including the concepts of quotas and monetization APIs available through this API Products
+* Categories related to the APIs of this Product.
 
 
 
-
-
-Clic on ->  **Brouillon** *(Draft)* > **Produits** *(Product)* > **Ajouter** *(Add)* > **Nouveau produit** *(New Product)*
+Clic on ->  **Draft** > **Product** > **Add** > **New Product**
 
 Complete with the values below then click **Create a Product**
 
