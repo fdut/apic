@@ -2,7 +2,7 @@
 API Connect Public repository
 
 
-## Proof Of Technology : APIC Connect v5  FR
+## Atelier Technique : APIC Connect v5  FR
 
 API Connect est une solutions d'API Management leader sur le marché. Découvrer la simplicité et la puissance d'API Connect au travers d'exercices simples afin d'illustrer les capacités d'intégrations, d'analyses et de sécurité de la solution.
 
