@@ -69,7 +69,7 @@ Read the code to understand the input to the request and the expected response.
 
 ### Protect API with Introspection lookup
 
-Now we need to secure access to our ressource API with Google OAuth token.
+Now we are going to secure access to our ressource API (Weather provider API) with Google OAuth token.
 
 - Open the Weather Provider API and scroll down to Security Definitions. Click the + button and select OAuth.
 
