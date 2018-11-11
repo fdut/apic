@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "b2d97c80-7b5c-4591-9c02-3a82d64d9e6d",
+		"name": "GoogleAuth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Check Google Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=ya29.GltPBoBemZqUfb0IRwNt7gvuNlO2Mf6XzuStpblIiKNyQIMpKvUZSnTeT6-gLojTJDn7L0m0h77jUUHKq9dCHN-5X2FrEPlHJKe167tq4YXHSifdGXclohUUNmS6",
+					"protocol": "https",
+					"host": [
+						"www",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"v3",
+						"tokeninfo"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "ya29.GltPBoBemZqUfb0IRwNt7gvuNlO2Mf6XzuStpblIiKNyQIMpKvUZSnTeT6-gLojTJDn7L0m0h77jUUHKq9dCHN-5X2FrEPlHJKe167tq4YXHSifdGXclohUUNmS6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "weather request",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{client_id}}"
+					},
+					{
+						"key": "x-ibm-client-secret",
+						"value": "{{client_secret}}",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_code}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://192.168.225.53/internalorg/sb/current?zipcode=90210",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"225",
+						"53"
+					],
+					"path": [
+						"internalorg",
+						"sb",
+						"current"
+					],
+					"query": [
+						{
+							"key": "zipcode",
+							"value": "90210"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

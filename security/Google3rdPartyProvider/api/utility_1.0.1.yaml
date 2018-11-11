@@ -1,0 +1,151 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "utility"
+  title: "utility"
+  version: "1.0.1"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/utility"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions: {}
+security:
+- {}
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - operation-switch:
+        title: "operation-switch"
+        case:
+        - operations:
+          - verb: "get"
+            path: "/basic-auth/{username}/{password}"
+          execute:
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "var reqauth = apim.getvariable('request.authorization').split('\
+                \ ');\nvar splitval = new Buffer((reqauth[1] || ''), 'base64').toString('utf8').split(':');\n\
+                var username = splitval[0] || '';\nvar password = splitval[1] || '';\n\
+                apim.console.debug('user credential : [' + username + ':' + password\
+                \ + ']');\nif (username === apim.getvariable('request.parameters.username')\
+                \ && password === apim.getvariable('request.parameters.password'))\
+                \ {\n\tsession.output.write({ \"authenticatedUser\": username });\n\
+                \tapim.setvariable('message.headers.api-authenticated-credential',\
+                \ 'cn=' + username + ',email=' + username + '@poon.com');\n\tapim.setvariable('message.status.code',\
+                \ 200);\n\tapim.output('application/json');\n}\nelse {\n\tapim.setvariable('message.status.code',\
+                \ 401);\n}"
+        - operations:
+          - verb: "get"
+            path: "/ping"
+          execute:
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "session.output.write({\"message\":\"hello world!\"});\napim.output(\"\
+                application/json\");"
+        - operations:
+          - verb: "post"
+            path: "/third-party-oauth/introspect/google-microservice"
+          execute:
+          - gatewayscript:
+              title: "Google 3rd party provide"
+              version: "1.0.0"
+              source: "// module urlopen\nvar url = require('urlopen');\n\n// Load\
+                \ the header-metadata API\nvar hm = require('header-metadata');\n\n\
+                // Declare Third Party Endpoint\nvar thirdpartyEndpoint = \"https://www.googleapis.com/oauth2/v3/tokeninfo\"\
+                ;\n\n// use TLS profile that contains the certificate (Google public\
+                \ certificate : CA & CA Chain)\nvar customSSLProfile = apim.getTLSProfileObjName('tlsdefault');\n\
+                \n// Set the headers\nhm.current.set('Content-Type', 'application/x-www-form-urlencoded');\n\
+                \n// define the https options to invoke bbva API\nvar options = {\n\
+                \        method: 'get',\n        headers: hm.current.headers, \n \
+                \       //target: thirdpartyEndpoint + '?access_token=' + currentToken,\n\
+                };\n\n// set the SSL Client Profile in the urlopen options\nif (customSSLProfile\
+                \ !== undefined && customSSLProfile.indexOf('client:') == 0) {\n \
+                \       options.sslClientProfile = customSSLProfile.substr(7);\n \
+                \   } else {\n        options.sslProxyProfile = customSSLProfile;\n\
+                }\n\n\napim.readInputAsBuffer(function (error, buffer) {\n\n\tif (error)\
+                \ {\n\t\tapim.setvariable('message.status.code', 500);\n\t}\n\telse\
+                \ {\n\t\tvar theinput =  buffer.toString();\n\t\t\n\t\t//Sample of\
+                \ value for theinput : token=GlxPBgmFxNpUcaje0JxsKT3GK_Hsa2wrhXe5Q8EfiPn3RivyNw9u6zkAhpZ5N60cv8A12aaQWcUVXdl4iNouDMqzbfTMYd1Rsic-e1xvmLzHO53QS06F3yud6Sdn_A&token_type_hint=access_token&client_id=74af2806-e5bb-4f28-8faa-1019266a44af\n\
+                \t\t\n\t\tvar reqauth = theinput.split('&');\n\t\t\n\t\t//Retrieve\
+                \ token\n        var rtoken = (reqauth[0].split('='))[1] || '';\n\
+                \        //Retrieve token_type\n        var rtoken_type_hint = (reqauth[1].split('='))[1]\
+                \ || '';\n        //Retrieve clientid\n        var rclientid = (reqauth[2].split('='))[1]\
+                \ || '';\n\n\t\t//console.error(\"token: \" + rtoken + \" token_type_hint:\"\
+                \ + rtoken_type_hint + \" clientid:\" + rclientid );\n\n\t    options.target\
+                \ = thirdpartyEndpoint + '?access_token=' + rtoken;\n\t\t\n\t\t//console.error(\"\
+                options: \" + JSON.stringify(options));\n\t\t\n\t    url.open(options,\
+                \ function(err, resp) {\n         if (err) throw err;\n\n        \
+                \ // Read the response data and parse into a JSON object\n       \
+                \  resp.readAsJSON(function(err, jsonResponse) {\n            if (err)\
+                \ throw err;\n        \n            if (jsonResponse.expires_in!==\
+                \ undefined )\n            {\n                // very important \n\
+                \                // reponse must containt { \"active\": true }, if\
+                \ not 401 is interpreted by introspect\n                //var response\
+                \ = { \"active\": true };\n                done({ \"active\": true\
+                \ },200);\n            } else {\n                done({\"error\":\
+                \ \"Invalid Value\"},400);\n            }\n\n         });\n      \
+                \  });\n\t}\n});\n\nfunction done (body,status) {\n    console.error(\"\
+                In done ...\");\n    session.output.write(body);\n    apim.output('application/json');\n\
+                \    apim.setvariable('message.status.code', status);\n}\n\n\n\n\n\
+                \n\n\n\n"
+              description: "Sample of microservice to validate Google Oauth token\
+                \ during introspect request"
+        otherwise: []
+        version: "1.0.0"
+    catch: []
+  gateway: "datapower-gateway"
+  phase: "realized"
+paths:
+  /ping:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+  /basic-auth/{username}/{password}:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+    parameters:
+    - $ref: "#/parameters/username"
+    - $ref: "#/parameters/password"
+    - $ref: "#/parameters/Authorization"
+  /third-party-oauth/introspect/google-microservice:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "access_token"
+        type: "string"
+        required: false
+        in: "query"
+        description: "Token from google"
+definitions: {}
+tags: []
+parameters:
+  username:
+    name: "username"
+    type: "string"
+    required: true
+    in: "path"
+  password:
+    name: "password"
+    type: "string"
+    required: true
+    in: "path"
+  Authorization:
+    name: "Authorization"
+    type: "string"
+    required: false
+    in: "header"
