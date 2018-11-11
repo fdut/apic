@@ -1,0 +1,30 @@
+---
+product: "1.0.0"
+info:
+  name: "third-party-product"
+  title: "third-party-product"
+  version: "1.0.0"
+visibility:
+  view:
+    enabled: true
+    type: "public"
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: "authenticated"
+    tags: []
+    orgs: []
+apis:
+  utility:
+    $ref: "utility_1.0.1.yaml"
+  weather-provider-api:
+    $ref: "weather-provider-api_1.0.1.yaml"
+plans:
+  default:
+    title: "Default Plan"
+    description: "Default Plan"
+    approval: false
+    rate-limit:
+      hard-limit: false
+      value: "100/hour"
