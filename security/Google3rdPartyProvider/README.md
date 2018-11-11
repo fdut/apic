@@ -73,7 +73,8 @@ Now we are going to secure access to our ressource API (Weather provider API) wi
 
 - Open the Weather Provider API and scroll down to Security Definitions. Click the + button and select OAuth.
 
-- Enter the name Google-oauth-third-party. In the Introspection URL field, enter the url to access to your utility API: 
+- Enter the name **Google-oauth-third-party**.
+- In the Introspection URL field, enter the url to access to your utility API: 
 
 	```https://<hostname>/<org>/<catalog>/utility/third-party-oauth/introspect/google-microservice```
 
@@ -92,7 +93,6 @@ Now we are going to secure access to our ressource API (Weather provider API) wi
 - Click Save.
 
 ## Test your API
-
 
 - Obtain an access token from the Google Third-Party OAuth provider (using the Goole OAuth 2.0 Playground) .
 
