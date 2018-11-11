@@ -12,9 +12,13 @@ consumes:
 - "application/json"
 produces:
 - "application/json"
-securityDefinitions: {}
-security:
-- {}
+securityDefinitions:
+  ClientId:
+    type: "apiKey"
+    description: ""
+    in: "header"
+    name: "X-IBM-Client-Id"
+security: []
 x-ibm-configuration:
   testable: true
   enforced: true
@@ -80,7 +84,7 @@ x-ibm-configuration:
                 \ token\n        var rtoken = (reqauth[0].split('='))[1] || '';\n\
                 \        //Retrieve token_type\n        var rtoken_type_hint = (reqauth[1].split('='))[1]\
                 \ || '';\n        //Retrieve clientid\n        var rclientid = (reqauth[2].split('='))[1]\
-                \ || '';\n\n\t\t//console.error(\"token: \" + rtoken + \" token_type_hint:\"\
+                \ || '';\n\n\t\tconsole.error(\"token: \" + rtoken + \" token_type_hint:\"\
                 \ + rtoken_type_hint + \" clientid:\" + rclientid );\n\n\t    options.target\
                 \ = thirdpartyEndpoint + '?access_token=' + rtoken;\n\t\t\n\t\t//console.error(\"\
                 options: \" + JSON.stringify(options));\n\t\t\n\t    url.open(options,\
@@ -92,12 +96,13 @@ x-ibm-configuration:
                 \                // reponse must containt { \"active\": true }, if\
                 \ not 401 is interpreted by introspect\n                //var response\
                 \ = { \"active\": true };\n                done({ \"active\": true\
-                \ },200);\n            } else {\n                done({\"error\":\
-                \ \"Invalid Value\"},400);\n            }\n\n         });\n      \
-                \  });\n\t}\n});\n\nfunction done (body,status) {\n    console.error(\"\
-                In done ...\");\n    session.output.write(body);\n    apim.output('application/json');\n\
-                \    apim.setvariable('message.status.code', status);\n}\n\n\n\n\n\
-                \n\n\n\n"
+                \ },200);\n                console.error(\"OK\");\n            } else\
+                \ {\n                done({\"error\": \"Invalid Value\"},400);\n \
+                \               console.error(\"jsonresponse: \" + JSON.stringify(jsonResponse));\n\
+                \            }\n\n         });\n        });\n\t}\n});\n\nfunction\
+                \ done (body,status) {\n    console.error(\"In done ...\");\n    session.output.write(body);\n\
+                \    apim.output('application/json');\n    apim.setvariable('message.status.code',\
+                \ status);\n}\n\n\n\n\n\n\n\n\n"
               description: "Sample of microservice to validate Google Oauth token\
                 \ during introspect request"
         otherwise: []
