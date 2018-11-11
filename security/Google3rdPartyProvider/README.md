@@ -31,19 +31,17 @@ https://raw.githubusercontent.com/fdut/apic/master/security/Google3rdPartyProvid
 
 The typical developer flow for this type of scenario is the following:
 
-
-The typical developer flow for this type of scenario is the following:
-
 - Application developer creates an application in the developer portal and obtains a client id and client secret.
 
 - (Optional) During the creation of the client id and secret from (1), the Third-party OAuth server will also need the same client id and secret as part of its OAuth server configuration. The dev portal will need to push the same information to the OAuth third-party server. This requirement is outside the scope of this tutorial. For more information, see [here](https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/com.ibm.apic.devportal.doc/tutorial_syncing_application_credentials.html)
 
 - After the App developer creates an application, it wil make a note of the published OAuth endpoint in the dev portal, which should point directly to the third-party OAuth provider. The API enforcement point will still be API Connect. This is the key point, API Connect does not participate in the OAuth authentication flow, it will ONLY perform token validation to protect access to the API resource.
 
-		**Example**: 
-	* OAuth endpoints: `https://<third-party-oauth-provider>/oauth2/token` & `https://<third-party-oauth-provider>/oauth2/authorize`
-	
-	* API Resource endpoint: `https://<api-connect-endpoint>/weather/current`
+**Example**: 
+		
+* OAuth endpoints: `https://<third-party-oauth-provider>/oauth2/token` & `https://<third-party-oauth-provider>/oauth2/authorize`
+
+* API Resource endpoint: `https://<api-connect-endpoint>/weather/current`
 
 - The App developer application will obtain an access token from the third-party OAuth endpoint. It will then call the API Resource endpoint (in API Connect).
 
