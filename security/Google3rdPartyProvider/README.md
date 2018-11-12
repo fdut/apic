@@ -248,9 +248,11 @@ Now we are going to secure access our ressource API (Weather provider API) with 
 # Other ressources
 
 
-[Integrate third party OAuth provider (Google) to secure APIs](https://developer.ibm.com/apiconnect/2017/10/10/integrate-third-party-oauth-provider-google/)
+- [Integrate third party OAuth provider (Google) to secure APIs](https://developer.ibm.com/apiconnect/2017/10/10/integrate-third-party-oauth-provider-google/)
 
-[OAuth 2.0 Playground](https://developers.google.com/oauthplayground/)
+- [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/)
 
-[Using third party OAuth providers to secure APIs](
+- [Using third party OAuth providers to secure APIs](
 https://developer.ibm.com/apiconnect/2017/11/10/using-third-party-oauth-providers-secure-apis/)
+
+- [Enforce API access with Third-party OAuth providers](https://github.com/ozairs/apiconnect/tree/master/oauth-third-party) 
