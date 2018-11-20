@@ -219,7 +219,7 @@ Now we are going to secure access our ressource API (Weather provider API) with 
 
 - The url used is for example this one :
 
-``https://<your_hostname>/<org>-<space-/<catalog>/weather/today?zipcode=90210``
+``https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb/weather/today?zipcode=90210``
 	
 - Replace value ``{{client_id}}`` with client id provider by API Connect and ``{{access_code}}`` with token provided by google.
 
