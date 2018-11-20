@@ -53,29 +53,71 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer {{access_code}}"
+						"value": "Bearer {{access_token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "https://192.168.225.53/internalorg/sb/current?zipcode=90210",
+					"raw": "https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb/weather/today?zipcode=90210",
 					"protocol": "https",
 					"host": [
-						"192",
-						"168",
-						"225",
-						"53"
+						"api",
+						"eu-de",
+						"apiconnect",
+						"ibmcloud",
+						"com"
 					],
 					"path": [
-						"internalorg",
+						"fdutorg-dev",
 						"sb",
-						"current"
+						"weather",
+						"today"
 					],
 					"query": [
 						{
 							"key": "zipcode",
 							"value": "90210"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Utility request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{client_id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "token={{access_token}}&token_type_hint=access_token&client_id=default"
+				},
+				"url": {
+					"raw": "https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb/utility/third-party-oauth/introspect/google-microservice",
+					"protocol": "https",
+					"host": [
+						"api",
+						"eu-de",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"fdutorg-dev",
+						"sb",
+						"utility",
+						"third-party-oauth",
+						"introspect",
+						"google-microservice"
 					]
 				}
 			},

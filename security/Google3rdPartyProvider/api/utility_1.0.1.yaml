@@ -18,7 +18,8 @@ securityDefinitions:
     description: ""
     in: "header"
     name: "X-IBM-Client-Id"
-security: []
+security:
+- ClientId: []
 x-ibm-configuration:
   testable: true
   enforced: true
@@ -67,7 +68,7 @@ x-ibm-configuration:
                 \ the header-metadata API\nvar hm = require('header-metadata');\n\n\
                 // Declare Third Party Endpoint\nvar thirdpartyEndpoint = \"https://www.googleapis.com/oauth2/v3/tokeninfo\"\
                 ;\n\n// use TLS profile that contains the certificate (Google public\
-                \ certificate : CA & CA Chain)\nvar customSSLProfile = apim.getTLSProfileObjName('tlsdefault');\n\
+                \ certificate : CA & CA Chain)\nvar customSSLProfile = apim.getTLSProfileObjName('tlsgoogle');\n\
                 \n// Set the headers\nhm.current.set('Content-Type', 'application/x-www-form-urlencoded');\n\
                 \n// define the https options to invoke bbva API\nvar options = {\n\
                 \        method: 'get',\n        headers: hm.current.headers, \n \
@@ -130,12 +131,6 @@ paths:
       responses:
         200:
           description: "200 OK"
-      parameters:
-      - name: "access_token"
-        type: "string"
-        required: false
-        in: "query"
-        description: "Token from google"
 definitions: {}
 tags: []
 parameters:

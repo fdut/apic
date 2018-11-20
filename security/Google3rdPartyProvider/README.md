@@ -159,7 +159,7 @@ Read the code to understand the input to the request and the expected response.
 
 Now we are going to secure access our ressource API (Weather provider API) with Google OAuth token.
 
-- Open the Weather Provider API and scroll down to Security Definitions. Click the + button and select OAuth.
+- Open the Weather Provider API and scroll down to Security Definitions. Click the + button and select **OAuth**
 
 - Enter the name **Google-oauth-third-party**
 
@@ -169,7 +169,7 @@ Now we are going to secure access our ressource API (Weather provider API) with 
 
 	For example
 		
-	```https://192.168.225.53/internalorg/sb/utility/third-party-oauth/introspect/google-microservice```. 
+	```https://api.eu-de.apiconnect.ibmcloud.com/fdutorg-dev/sb/utility/third-party-oauth/introspect/google-microservice```. 
 
 	Leave the remaining fields at their default values.
 
@@ -216,6 +216,10 @@ Now we are going to secure access our ressource API (Weather provider API) with 
 	``https://raw.githubusercontent.com/fdut/apic/master/security/Google3rdPartyProvider/GoogleAuth.postman_collection.json``
 		
 - Open the Weather request and select the Headers tab. 
+
+- The url used is for example this one :
+
+``https://<your_hostname>/<org>-<space-/<catalog>/weather/today?zipcode=90210``
 	
 - Replace value ``{{client_id}}`` with client id provider by API Connect and ``{{access_code}}`` with token provided by google.
 
