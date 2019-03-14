@@ -14,7 +14,7 @@ Each of these appliances requires minimum of 4GB of RAM, so a machine with at le
 
 In production, you would scale to use more than one of each appliance; however one of each appliance is sufficient for a demo cloud.
 
-It is also possible to run API Connect in Bluemix as Software as a Service, but is not covered with this document.
+It is also possible to run API Connect in IBM Cloud as Software as a Service, but is not covered with this document.
 
 ## Download installation images
 
@@ -36,17 +36,17 @@ For **API Manager** :
  
 For **API Gateway** :
 
-* for no-production download OVA of IBM Datapower Gateway 7.6.0.0 no-production (The non-production version includes the required Application Optimization feature by default) : idg7600.noprod.ova
+* for no-production download OVA of IBM Datapower Gateway 2018.4.1.0 no-production (The non-production version includes the required Application Optimization feature by default) : DATAPOWER GATEWAY VIRTUAL EDITION NO PRO ENVT 
 
-* for production download OVA of IBM Datapower Gateway 7.6.0.0 : idg7600.prod.ova
+* for production download OVA of IBM Datapower Gateway 2018.4.1.0 : DATAPOWER GATEWAY VIRTUAL EDITION PRO ENVT 
  
-Download fixes **IDG-virtual-7.6.0.3-Firmware** :[here](https://www-945.ibm.com/support/fixcentral/swg/doSelectFixes?options.selectedFixes=IDG-virtual-7.6.0.3-Firmware&continue=1)
+Download fixes **IDG-virtual-7.6.0.3-Firmware** :[here](https://www-945.ibm.com/support/fixcentral/swg/doSelectFixes?options.selectedFixes=IDG-virtual-2018.4.1.3-Firmware&continue=1)
 
 ## Define Hosts and IPs
 
 For this installation, all VMs are hosted on the same machine. 
  
-The following static IP addresses will be used for the IBM API Connect appliances.  It is highly recommended that you follow the static addressing indicated in this document.  The subnet used is the same for both the API Connect and DataPower POT Assets.  A sample hostname structure is provided in the cha
+The following static IP addresses will be used for the IBM API Connect appliances.  It is highly recommended that you follow the static addressing indicated in this document.  A sample hostname structure is provided below
  
 ```
 # Manager
