@@ -5,13 +5,13 @@
 ## Créer un Compte IBM Cloud
 ---
 
-1.  Lancer [https://console.bluemix.net/](https://console.bluemix.net/) dans votre navigateur internet.
+1.  Lancer [https://cloud.ibm.com/](https://cloud.ibm.com/) dans votre navigateur internet.
 
-1.  Cliquer sur le bouton `Créer un compte gratuit`:
+1.  Cliquer sur le bouton `Créer un compte IBM`:
  	
     ![](./img/createaccount.png)
 
-1.  Compléter le formulaire et cliquer sur le bouton `Create Account`.
+1.  Compléter le formulaire et cliquer sur le bouton `Créé un compte`.
 
 1.  Vous recevrez un e-mail vous demandant de confirmer votre adresse e-mail. Consulter votre e-mail et cliquer sur le lien `Confirm Account`.
 
